@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import scipy as sp
 
-def getD(G, alpha=0.9):
+def getD(G, alpha=0.9, gamma = 1):
     # This scheme is way too strict
     beta = 1 - alpha
     global A,V,n,VInd
@@ -40,21 +40,31 @@ def getD(G, alpha=0.9):
             D[VInd[node],VInd[cocit[0]],VInd[cocit[1]]] = toSet1
         for noncocit in noncocitlist:
             D[VInd[node],VInd[noncocit[0]],VInd[noncocit[1]]] = toSet2
-    # pprint.pprint(D)
+
+    # D[i,i,k]
+    for node1 in VInd:
+        D_all = sum(sum(D[:,VInd[node1],:]))
+        if D_all > 0:
+            for node2 in VInd:
+                D[VInd[node1],VInd[node1],VInd[node2]] = sum(D[:,VInd[node1],VInd[node2]]) / D_all
+
+    pprint.pprint(D)
     return D
 
-def getC(G, D, iter=1):
+def getC(G, D, iterations=1):
     eps = np.finfo(float).eps
     global A,V,n,VInd
 
     C = sp.sparse.lil_matrix(A / np.tile(sp.sparse.csr_matrix.sum(A,axis=1)+eps,(1,n))) #Initialize
-    for j in range(n):
-        for k in range(n):
-            if j != k:
-                C[j,k] = C[j,k] + C[:,j].T.dot(D[:,j,k])
+
+    for iter in range(iterations):
+        for j in range(n):
+            for k in range(n):
+                if j != k:
+                    C[j,k] = C[j,k] + C[:,j].T.dot(D[:,j,k])
     return C
 
-def fairShareMain(G):
+def fairShareMain(G,iter=1):
     global A,V,n,VInd
 
     # Global variables
@@ -66,7 +76,7 @@ def fairShareMain(G):
         VInd[elem] = i
 
     D = getD(G)
-    C = getC(G, D)
+    C = getC(G, D, iterations=iter)
 
     Csum = sp.sparse.lil_matrix.sum(C,axis=0)
     CsumNorm = Csum / np.sum(Csum)
@@ -74,8 +84,22 @@ def fairShareMain(G):
     print V
     print CsumNorm
 
+def comparisons(G):
+    evec = nx.eigenvector_centrality(G)
+    print "EVEC:",evec
+
+    pagerank = nx.pagerank(G)
+    print "PAGERANK: ", pagerank
+
+    katz = nx.katz_centrality(G)
+    print "KATZ: ", katz
+
 if __name__ == "__main__":
-    filename = 'data/tenpol.txt'
+    filename = 'data/tenpol2.txt'
 
     G = nx.read_adjlist(filename, create_using=nx.DiGraph())
-    fairShareMain(G)
+    fairShareMain(G,iter=1)
+    # comparisons(G)
+
+    # nx.draw_networkx(G)
+    # plt.show()
