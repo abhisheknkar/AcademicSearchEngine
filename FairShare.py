@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import scipy as sp
 
-def getD(G, alpha=0.9, gamma = 1):
+def getD(G, alpha=0.9, gamma=1):
     # This scheme is way too strict
     beta = 1 - alpha
     global A,V,n,VInd
@@ -46,19 +46,23 @@ def getD(G, alpha=0.9, gamma = 1):
         D_all = sum(sum(D[:,VInd[node1],:]))
         if D_all > 0:
             for node2 in VInd:
-                D[VInd[node1],VInd[node1],VInd[node2]] = sum(D[:,VInd[node1],VInd[node2]]) / D_all
+                # continue
+                D[VInd[node1],VInd[node1],VInd[node2]] = gamma*sum(D[:,VInd[node1],VInd[node2]]) / D_all
 
-    pprint.pprint(D)
+    # pprint.pprint(D)
     return D
 
-def getC(G, D, iterations=1):
+def getC(G, D, iterations=1, delta=1):
     eps = np.finfo(float).eps
     global A,V,n,VInd
 
     C = sp.sparse.lil_matrix(A / np.tile(sp.sparse.csr_matrix.sum(A,axis=1)+eps,(1,n))) #Initialize
 
     for iter in range(iterations):
-        for j in range(n):
+        for i in range(n):  #Update the diagonal elements
+            C[i,i] = max(sp.sparse.csr_matrix.sum(C[:,i] - C[i,:].T) + delta, 0)   #Incoming = Retained + Outgoing
+
+        for j in range(n):  #Update the off-diagonal elements
             for k in range(n):
                 if j != k:
                     C[j,k] = C[j,k] + C[:,j].T.dot(D[:,j,k])
@@ -76,7 +80,7 @@ def fairShareMain(G,iter=1):
         VInd[elem] = i
 
     D = getD(G)
-    C = getC(G, D, iterations=iter)
+    C = getC(G, D, iterations=iter, delta=5)
 
     Csum = sp.sparse.lil_matrix.sum(C,axis=0)
     CsumNorm = Csum / np.sum(Csum)
@@ -95,10 +99,10 @@ def comparisons(G):
     print "KATZ: ", katz
 
 if __name__ == "__main__":
-    filename = 'data/tenpol2.txt'
+    filename = 'data/tenpol.txt'
 
     G = nx.read_adjlist(filename, create_using=nx.DiGraph())
-    fairShareMain(G,iter=1)
+    fairShareMain(G,iter=10)
     # comparisons(G)
 
     # nx.draw_networkx(G)
