@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<paper>
+    <title>QoS Support in Wireless Sensor Networks: A Survey.</title>
+    <author>Dazhi Chen</author>
+    <author>Pramod K. Varshney</author>
+    <venue>International Conference on Wireless Networks</venue>
+    <year>2004</year>
+    <key>conf/icwn/ChenV04</key>
+    <doi>10.1.1.232.5719</doi>
+    <abstract>Abstract: Real-time wireless sensor networks are becoming more and more important by the requirement of message delivery timeliness in emerging new applications. Supporting real-time QoS in sensor networks faces severe challenges due to the wireless nature, limited resource, low node reliability, distributed architecture and dynamic network topology. There are tradeoffs between different application requirements including energy efficiency and delay performance. This paper studies the state of the art of current real-time solutions including MAC protocols, routing protocols, data processing strategies and cross-layer designs. Some research challenges and future design favors are also identified and discussed. Keywords: Real-time, wireless sensor networks, MAC, routing, cross-layer. 1.</abstract>
+    <citations>
+        <citation>
+            <raw>Akkaya, K. and M. Younis (2003). An energyaware QoS routing protocol for wireless sensor networks. In: Proc. Int. Conf. Distrib. Comput. Syst. Workshops. pp. 710–715.</raw>
+            <contexts>network topology may change frequently. Thus it employs a novel neighborhood management mechanism which is more efficient than the periodic beacon scheme adopted by SPEED and MMSPEED. Akkaya et al. (=-=Akkaya and Younis, 2003-=-) propose an energy-aware QoS routing protocol that will find energy-efficient path along which the endto-end delay requirement can be met. It is assumed each node has a classifier to check the type o</contexts>
+            <clusterid>650016</clusterid>
+        </citation>
+        <citation>
+            <raw>Bacco, G.D., T. Melodia and F. Cuomo (2004). A MAC protocol for delay-bounded applications in wireless sensor networks. In: Proc. MedHoc-Net. pp. 208–220.</raw>
+            <contexts>ots scheduled in an interval is adjusted adaptively according to network traffic load to alleviate collisions. Simulations show that DMAC can achieve both energy saving and latency reduction. DB-MAC (=-=Bacco et al., 2004-=-) is a contentionbased MAC protocol designed for delay bounded applications upon hierarchical data gathering tree. Basically, a transmission close to the source has a higher priority than a transmissi</contexts>
+            <clusterid>5290357</clusterid>
+        </citation>
+        <citation>
+            <raw>Caccamo, M., L.Y. Zhang, L. Sha and G. Buttazzo (2002). An implicit prioritized access protocol for wireless sensor networks. In: Proc. 23rd IEEE RTSS. pp. 39–48.Chipara, O., Z. He, G. Xing, Q. Chen, X. Wang, C. Lu, J. Stankovic and T. Abdelzaher (2006). Real-time power-aware routing in sensor network. In: Proc. IWQoS. pp. 83–92.</raw>
+            <contexts>T-MAC and B-MAC only provide best effort service but not RT guarantee. To be a RT MAC, either a deterministic or statistical delay bound is required. An implicit prioritized access protocol (I-EDF) (=-=Caccamo et al., 2002-=-) is designed especially for HRT-WSNs. A cellular backbone network is adopted and different frequency channels are assigned. In a cell, time is divided into frames and all nodes are frame synchronized</contexts>
+            <clusterid>551512</clusterid>
+        </citation>
+        <citation>
+            <raw>Ergen, S.C. and P. Varaiya (2006). PEDAMACS: power efficient and delay aware medium access protocol for sensor networks. IEEE Trans. Mobile Comput. 5(7), 920–930. Ergen, S.C. and P. Varaiya (to be published). Energy efficient routing with latency guarantee for sensor networks. ACM Wireless Networks.</raw>
+            <contexts>ention while it is a little worse under low contention. Although Z-MAC is not specifically designed for RT service, the idea of switching between TDMA and CSMA based protocols is inspiring. PEDAMACS (=-=Ergen and Varaiya, 2006-=-) is a TDMA-based MAC protocol that aims to achieve both energy efficiency and delay guarantee. It considers a special class of sensor networks with highpowered access point (AP) which can reach all n</contexts>
+            <clusterid>3764834</clusterid>
+        </citation>
+        <citation>
+            <raw>Felemban, E., C.G. Lee and E. Ekici (2006). MMSPEED: Multipath multi-speed protocol for QoS guarantee of reliability and timeliness in wireless sensor network. IEEE Trans. Mobile Comput. 5(6), 738–754.</raw>
+            <contexts>network wide speed is maintained such that SRT end-to-end delivery is obtained with a theoretical delay bound. Besides, the mechanism works in a localized way which makes it quite scalable. MMSPEED (=-=Felemban et al., 2006-=-) is an extension of SPEED which supports service differentiation and probabilistic QoS guarantee. For delivery timeliness, multiple network-wide packet delivery speed options are provided for differe</contexts>
+            <clusterid>461852</clusterid>
+        </citation>
+        <citation>
+            <raw>Francomme, J., G. Mercier and T. Val (2006). A simple method for guaranteed deadline of periodic messages in 802.15.4 cluster cells for control automation applications. In: Proc. IEEE ETFA. pp. 270–277.</raw>
+            <contexts>S guarantees are still developing. It is possible to let the PAN coordinator distribute GTSs corresponding to the deadline and bandwidth requirements of transmissions so as to support HRT guarantees (=-=Francomme et al., 2006-=-). On the other hand, enhanced CSMA/CA MAC mechanisms may offer soft delay guarantees (Koubâa et al., 2006). For example, priority toning strategy is used in (Kim and Choi, 2006). A node will send a t</contexts>
+            <clusterid>13768474</clusterid>
+        </citation>
+        <citation>
+            <raw>Hadim, S. and N. Mohamed (2006). Middleware: middleware challenges and approaches for wireless sensor networks. IEEE Distrib. Syst.</raw>
+            <contexts>ions and lower layers so as to provide abstraction and mechanisms for efficient andadaptive coordination. Some informative discussions of the design issues for WSNs can be found in (Yu et al., 2004; =-=Hadim and Mohamed, 2006-=-). The detail will not be addressed here. The remainder of the article is organized as follows. Section 2 aims to provide a survey on the state of the art of related MAC, routing, data processing and</contexts>
+            <clusterid>7562923</clusterid>
+        </citation>
+        <citation>
+            <raw>He, T., A.V. Pascal, T. Yan, L. Luo, L. Gu, G. Zhou, R. Stoleru, Q. Cao, J.A. Stankovic and T.F. Abdelzaher (2006a). Achieving realtime target tracking using wireless sensor networks. In: Proc. IEEE RTAS. pp. 37–48.</raw>
+            <contexts></contexts>
+            <clusterid>14379659</clusterid>
+        </citation>
+        <citation>
+            <raw>He, T., B. M. Blum, Q. Cao, J. A. Stankovic, S. H. Son and T. F. Abdelzaher (2007). Robust and timely communication over highly dynamic sensor networks. Real-Time Systems Journal.</raw>
+            <contexts></contexts>
+            <clusterid>14379660</clusterid>
+        </citation>
+        <citation>
+            <raw>He, T., J.A. Stankovic, C. Lu and T. Abdelzaher (2003). SPEED: a stateless protocol for realtime communication in sensor networks. In: Proc. ICDCS. pp. 46–55.</raw>
+            <contexts>re designed to reduce transmission or queueing delay but without deterministic or probabilistic guarantee. Therefore, in nature they do not support RT QoS but just provide best effort service. SPEED (=-=He et al., 2003-=-) is a RT routing protocol for soft end-to-end deadline guarantee by maintaining a desired delivery speed across the network. The core module is the stateless nondeterministic geographic forwarding (S</contexts>
+            <clusterid>142337</clusterid>
+        </citation>
+        <citation>
+            <raw>He, T., L. Gu, L. Luo, T. Yan, J. Stankovic, T. Abdelzaher and S. Son (2006b). An overview of data aggregation architecture for real-time tracking with sensor networks. In: Proc. IEEE RTAS. pp. 55–66.</raw>
+            <contexts></contexts>
+            <clusterid>4393433</clusterid>
+        </citation>
+        <citation>
+            <raw>Hu, Y., N. Yu and X. Jia (2006). Energy efficient real-time data aggregation in wireless sensor networks. In: Proc. IWCMC. pp. 803–808.</raw>
+            <contexts>y of QoS guarantee in WSNs. In-network data aggregation is able to improve energy efficiency and has an important role on the quality of surveillance, data timeliness and system overheads. Hu et al. (=-=Hu et al., 2006-=-) investigate the energy efficiency of data aggregation tree in WSNs. An analytic model based on IEEE 802.15.4 CSMA/CA is developed to compute a node’s worst case delay in aggregating data from all ch</contexts>
+            <clusterid>4675483</clusterid>
+        </citation>
+        <citation>
+            <raw>IEEE Std 802.15.4 (2006). Part 15.4: Wireless medium access (MAC) and physical layer (PHY) specifications for low-rate wireless personal area networks (WPANs). IEEE-SA.</raw>
+            <contexts></contexts>
+            <clusterid>0</clusterid>
+        </citation>
+        <citation>
+            <raw>Kim, T.H. and S. Choi (2006). Priority-based delay mitigation for event-monitoring IEEE 802.15.4 LR-WPANs. IEEE Commun. Letters 10(3), 213–215.</raw>
+            <contexts>rt HRT guarantees (Francomme et al., 2006). On the other hand, enhanced CSMA/CA MAC mechanisms may offer soft delay guarantees (Koubâa et al., 2006). For example, priority toning strategy is used in (=-=Kim and Choi, 2006-=-). A node will send a tone signal to the PAN coordinator to request it alerting other nodes to defer their contentions so as to support a fast delivery of high priority frames. In (Koubâa et al., 2006</contexts>
+            <clusterid>7411091</clusterid>
+        </citation>
+        <citation>
+            <raw>Koubâa, A., M. Alves, B. Nefzi and Y. Q. Song (2006). Improving the IEEE 802.15.4 slotted CSMA/CA MAC for time-critical events in wireless sensor networks. In: Proc. Workshop Real-Time Networks. pp. 270–277.</raw>
+            <contexts>the deadline and bandwidth requirements of transmissions so as to support HRT guarantees (Francomme et al., 2006). On the other hand, enhanced CSMA/CA MAC mechanisms may offer soft delay guarantees (=-=Koubâa et al., 2006-=-). For example, priority toning strategy is used in (Kim and Choi, 2006). A node will send a tone signal to the PAN coordinator to request it alerting other nodes to defer their contentions so as to s</contexts>
+            <clusterid>9392038</clusterid>
+        </citation>
+        <citation>
+            <raw>Lu, C., B.M. Blum, T.F. Abdelzaher, J.A. Stankovic and T. He (2002). RAP: a realtime communication architecture for largescale wireless sensor networks. In: Proc. IEEE RTAS. pp. 55–66.</raw>
+            <contexts>oint of view, it is reasonable to consider RT issues cross different layers in the communication stack. The following designs have provided RT guarantee in a cooperative crosslayer architecture. RAP (=-=Lu et al., 2002-=-) is a cross-layer RT communication architecture for large-scale sensor networks. It is supported by a scalable and efficient protocol stack, which integrates a transport-layer location-addressed prot</contexts>
+            <clusterid>20040</clusterid>
+        </citation>
+        <citation>
+            <raw>Lu, G., B. Krishnamachari and C.S. Raghavendra (2004). An adaptive energy-efficient and lowlatency MAC for data gathering in wireless sensor networks. In: Proc. Int. Parallel Distrib. Process. Symp. pp. 224–231.</raw>
+            <contexts>nels are required for different cells, and (iii) a cellular network structure is needed in the protected mode. However, these mixed FDMA-TDMA schemes are promising in supporting HRT guarantees. DMAC (=-=Lu et al., 2004-=-) is an energy efficient and low-latency MAC designed for unidirectional data gathering tree. Conventional MAC protocols that utilize active/sleep duty cycle often suffer from significant sleep delay</contexts>
+            <clusterid>168570</clusterid>
+        </citation>
+        <citation>
+            <raw>Ngai, E.C.H., M.R. Lyu and J. Liu (2006). A real-time communication framework for wireless sensor-actuator networks. In: Proc. IEEE Aerospace Conf.</raw>
+            <contexts>to satisfy the deadline requirements of multiple tasks simultaneously. In wireless sensor-actuator networks (WSANs), sensors have multiple potential destinations (e.g. actuators) in event reporting (=-=Ngai et al., 2006-=-). Besides, actuators could be mobile in conducting actions. The resulting heterogenous system is quite different from a traditional data collection WSN model with single static sink. Note that, in WS</contexts>
+            <clusterid>4416511</clusterid>
+        </citation>
+        <citation>
+            <raw>Polastre, J., J. Hill and D. Culler (2004). Versatile low power media access for wireless sensor networks. In: Proc. ACM Sensys. pp. 95–107.</raw>
+            <contexts>ed to those which can provide deterministic or probabilistic guarantee but also some commonly used MAC protocols, for example, S-MAC (Ye et al., 2004), T-MAC (van Dam and Langendoen, 2003) and B-MAC (=-=Polastre et al., 2004-=-), which reduce delay in a best effort approach. S-MAC is a CSMA/CA based protocol. It uses periodic listening and sleeping to save energy consumption in WSNs. In order to reduce introduced latency du</contexts>
+            <clusterid>328002</clusterid>
+        </citation>
+        <citation>
+            <raw>Pothuri, P.K., V. Sarangan and J.P. Thomas (2006). Delay-constrained energy efficient routing in wireless sensor networks through topology control. In: Proc. IEEE Int. Conf. Netw. Sensing Control. pp. 35–41.</raw>
+            <contexts>account the delay that occurs due to channel access at the MAC. Moreover, the use of class-based priority queuing mechanism is too complicated and costly for resource limited sensors. Pothuri et al. (=-=Pothuri et al., 2006-=-) design a heuristic solution to find energy-efficient path for delay-constrained data in WSNs. They employ topology control and have a modeling of the contention delay caused by MAC layer. A set of p</contexts>
+            <clusterid>13768476</clusterid>
+        </citation>
+        <citation>
+            <raw>Rhee, I., A. Warrier, M. Aia and J. Min (2005). Z-MAC: a hybrid MAC for wireless sensor networks. In: Proc. ACM Sensys. pp. 90–101.</raw>
+            <contexts>s interesting to see that DMAC and DB-MAC have MAC with some routing considerations. The result will be favorable to tree-based routing protocols and helpful to delay sensitive data gathering. Z-MAC (=-=Rhee et al., 2005-=-) is a hybrid MAC protocol which dynamically switches between CSMA and TDMA depending on the level of contention. It uses the knowledge of topology and a loosely synchronized clock as hints to improve</contexts>
+            <clusterid>346924</clusterid>
+        </citation>
+        <citation>
+            <raw>Ruzzelli, A.G., G.M.P. O’Hare, M.J. O’Grady and R. Tynan (2006). MERLIN: a synergetic integration of MAC and routing protocol for distributed sensor networks. In: Proc. IEEE SECON. pp. 266–275.</raw>
+            <contexts></contexts>
+            <clusterid>3749690</clusterid>
+        </citation>
+        <citation>
+            <raw>Stankovic, J., T. Abdelzaher, C. Lu, L. Sha and J. Hou (2003). Real-time communication and coordination in embedded sensor networks.</raw>
+            <contexts>th diagnosis. WSN differs dramatically from the traditional RT systems due to its wireless nature, limited resources (power, processing and memory), low node reliability and dynamic network topology (=-=Stankovic et al., 2003-=-). Thus, developing realtime applications over WSN should consider not only resource constraints, but also the node and communication reliability and the globally time varying network performance. Ver y only aims to deliver packets to destination before deadlines. In an application oriented WSN, events instead are required to be reported in time. Simple end-to-end data delay bound is insufficient (=-=Stankovic et al., 2003-=-) for application oriented WSNs. It is interesting to consider in-network data aggregation so as to allow a faster information delivery after data redundancy elimination. This not only saves transmiss</contexts>
+            <clusterid>277194</clusterid>
+        </citation>
+        <citation>
+            <raw>van Dam, T. and K. Langendoen (2003). An adaptive energy-efficient MAC protocol for wireless sensor networks. In: Proc. ACM Sensys.</raw>
+            <contexts></contexts>
+            <clusterid>168559</clusterid>
+        </citation>
+        <citation>
+            <raw>Watteyne, T., I. Augé-Blum and S. Ubéda (2006). Dual-mode real-time MAC protocol for wireless sensor networks: a validation/simulation approach. In: Proc. InterSense.</raw>
+            <contexts>equirements appear impractical for WSNs. Nodes are assumed synchronized. Routers need to be deployed specifically following the cellular structure and topology knowledge is required. Watteyne et al. (=-=Watteyne et al., 2006-=-) propose a dual-mode MAC protocol which supports HRT but with more relaxed assumption than I-EDF. The goal is to guarantee deterministic transmission time compatible to application deadline. A linear</contexts>
+            <clusterid>814279</clusterid>
+        </citation>
+        <citation>
+            <raw>Wu, J., P. Havinga, S. Dulman and T. Nieberg (2004). Eyes source routing protocol for wireless sensor networks. In: Proc. EWSN.</raw>
+            <contexts>ergy, processing energy, etc. Routing: (multi-hop) HRT Routing e.g. ErgenRouting SRT Routing e.g. SPEED, MMSPEED, RARP LQI Physical Layer Fig. 1. Cross-layer design for RT-WSNs (Eyes Source Routing) (=-=Wu et al., 2004-=-) in both energy efficiency and latency. However, it should be noted that S-MAC and ESR are not designed for RT application. The delay performance of MERLIN should be investigated more specifically. V</contexts>
+            <clusterid>3749697</clusterid>
+        </citation>
+        <citation>
+            <raw>Ye, W., J. Heidemann and D. Estrin (2004). Medium access control with coordinated adaptive sleeping for wireless sensor networks. IEEE/ACM Trans. Netw. 12(3), 493– 506.</raw>
+            <contexts>In contention-based MAC, due to the distributed and random backoff nature, it is difficult to provide a deterministic channel access guarantee. Packet collision is generally inevitable but reducible (=-=Ye et al., 2004-=-). Nevertheless, a welldefined statistical bound is always required in offering SRT guarantee. On the other hand, contention-free MAC can be deployed with dedicated channel allocation. In TDMA-based M ted. For the completeness, the discussion of MAC here is not limited to those which can provide deterministic or probabilistic guarantee but also some commonly used MAC protocols, for example, S-MAC (=-=Ye et al., 2004-=-), T-MAC (van Dam and Langendoen, 2003) and B-MAC (Polastre et al., 2004), which reduce delay in a best effort approach. S-MAC is a CSMA/CA based protocol. It uses periodic listening and sleeping to s</contexts>
+            <clusterid>23800</clusterid>
+        </citation>
+        <citation>
+            <raw>Yu, Y., B. Krishnamachari and V.K. Prasanna (2004). Issues in designing middleware for wireless sensor networks. IEEE Network Mag.</raw>
+            <contexts>between applications and lower layers so as to provide abstraction and mechanisms for efficient andadaptive coordination. Some informative discussions of the design issues for WSNs can be found in (=-=Yu et al., 2004-=-; Hadim and Mohamed, 2006). The detail will not be addressed here. The remainder of the article is organized as follows. Section 2 aims to provide a survey on the state of the art of related MAC, rout</contexts>
+            <clusterid>5761</clusterid>
+        </citation>
+        <citation>
+            <raw>Yu, Y., V.K. Prasanna and B. Krishnamachari (2006). Energy minimization for real-time data gathering in wireless sensor networks. IEEE Trans. Wireless Commun. 5(11), 3087– 3096.</raw>
+            <contexts>ent accuracy and buffer overflow. Note that the design is only evaluated in a fixed network. Its operations and performance in dynamic systems need to be verified and further investigated. Yu et al. (=-=Yu et al., 2006-=-) study the energy-latency tradeoff in data gathering of mission critical RT applications. They consider packet scheduling in a tree structure and employ a precisely defined nonmonotonic energy cost m</contexts>
+            <clusterid>4340008</clusterid>
+        </citation>
+    </citations>
+</paper>
