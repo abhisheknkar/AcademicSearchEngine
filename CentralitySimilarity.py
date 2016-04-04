@@ -3,6 +3,7 @@ __author__ = 'Abhishek'
 import networkx as nx
 import scipy.sparse as sp
 from sets import Set
+import numpy as np
 
 def DFSpaths(G, curr, dest, visited, paths):
     visited2 = visited + [curr]
@@ -16,7 +17,7 @@ def DFSpaths(G, curr, dest, visited, paths):
                     paths = DFSpaths(G, nbr, dest, visited2, paths)
     return paths
 
-def relativeSim(G, maxdist=3):
+def computeSimilarityAll(G, maxdist=3):
     S = {}
     for node in G.nodes():
         S[node] = {}    #Initialize the similarity matrix
@@ -43,7 +44,28 @@ def relativeSim(G, maxdist=3):
                             S[dest2][dest1] += toadd
     return S
 
-def nodeAtHops(G,start,currhops=0,maxhops=1, visited=[], dir2nodes={}):
+def computeSimilarityPair(G, node1, node2, maxdist=3, disjoint=False):
+    reachables1 = nodeAtHops(G,node1,0,maxdist,[],{},reverse=True) #Get all paths reachable from node1 of length less than max
+    reachables2 = nodeAtHops(G,node2,0,maxdist,[],{},reverse=True) #Get all paths reachable from node2 of length less than max
+
+    commonDest = set(reachables1.keys()).intersection(set(reachables2.keys()))
+
+    sim12 = 0
+    for dest in commonDest:
+        for path1 in reachables1[dest]:
+            for path2 in reachables2[dest]:
+                if disjoint==True:
+                    if len(set(path1[1:-1]).intersection(set(path2[1:-1]))) > 0:
+                        continue
+                totalLength = len(path1) + len(path2) - 2
+                # print path1, path2
+                sim12 += len2simFunc(totalLength, 0.5)
+    return sim12
+
+def len2simFunc(length, alpha=0.5):
+    return alpha**length
+
+def nodeAtHops(G,start,currhops=0,maxhops=1, visited=[], dir2nodes={}, reverse=False):
     visited2 = visited + [start]
 
     if currhops <= maxhops or len(G.neighbors(start))==0:
@@ -54,10 +76,15 @@ def nodeAtHops(G,start,currhops=0,maxhops=1, visited=[], dir2nodes={}):
         if currhops == maxhops:
             return dir2nodes
 
-    if len(G.neighbors(start))>0:
-        for nbr in G.neighbors(start):
+    if reverse == False:
+        nbrs = G.neighbors(start)
+    else:
+        nbrs = G.predecessors(start)
+
+    if len(nbrs)>0:
+        for nbr in nbrs:
             if nbr not in visited2:
-                dir2nodes = nodeAtHops(G, nbr, currhops+1, maxhops, visited2, dir2nodes)
+                dir2nodes = nodeAtHops(G, nbr, currhops+1, maxhops, visited2, dir2nodes, reverse=reverse)
 
     return dir2nodes
 
@@ -65,5 +92,8 @@ if __name__ == "__main__":
     filename = 'data/test.txt'
 
     G = nx.read_adjlist(filename, create_using=nx.DiGraph())
-    S = relativeSim(G,3)
+    # S = computeSimilarityAll(G,3)
+    # print S
+
+    S = computeSimilarityPair(G,node1=u'4',node2=u'5',maxdist=3, disjoint=True)
     print S
