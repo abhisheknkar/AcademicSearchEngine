@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="60bf3af1-97f5-4e18-ba9b-11d049999c5b" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/simpleSE/CS_Evaluation.py" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/CentralitySimilarity.py" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/simpleSE/CS_Evaluation.py" afterPath="$PROJECT_DIR$/simpleSE/CS_Evaluation.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/simpleSE/CentralitySimilarity.py" afterPath="$PROJECT_DIR$/simpleSE/CentralitySimilarity.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="SE0.1.iws" />
@@ -37,26 +37,28 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CS_Evaluation.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="CS_Evaluation.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/simpleSE/CS_Evaluation.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="23" column="0" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.9235294">
+              <caret line="51" column="17" selection-start-line="51" selection-start-column="17" selection-end-line="51" selection-end-column="17" />
               <folding>
                 <element signature="e#88#109#0" expanded="true" />
+                <element signature="e#294#796#0" expanded="false" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CentralitySimilarity.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="CentralitySimilarity.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/simpleSE/CentralitySimilarity.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.55457747">
-              <caret line="62" column="16" selection-start-line="62" selection-start-column="16" selection-end-line="62" selection-end-column="16" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="109" column="41" selection-start-line="109" selection-start-column="41" selection-end-line="109" selection-end-column="41" />
               <folding>
                 <element signature="e#226#518#0" expanded="false" />
                 <element signature="e#564#1674#0" expanded="false" />
+                <element signature="e#1751#2523#0" expanded="false" />
                 <element signature="e#2565#2585#0" expanded="false" />
               </folding>
             </state>
@@ -101,9 +103,9 @@
   </component>
   <component name="ProjectFrameBounds">
     <option name="x" value="55" />
-    <option name="y" value="24" />
-    <option name="width" value="1225" />
-    <option name="height" value="696" />
+    <option name="y" value="52" />
+    <option name="width" value="1215" />
+    <option name="height" value="638" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <OptionsSetting value="true" id="Add" />
@@ -128,6 +130,8 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="Scratches" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -176,8 +180,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scratches" />
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -201,23 +203,6 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="SE0.1" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/simpleSE/graphOps_DBLP.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <method />
-    </configuration>
-    <configuration default="false" name="write2DB_DBLP" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/simpleSE" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="SE0.1" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/simpleSE/write2DB_DBLP.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <method />
@@ -269,6 +254,23 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="SE0.1" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/simpleSE/CS_Evaluation.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <method />
+    </configuration>
+    <configuration default="false" name="CentralitySimilarity (1)" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/simpleSE" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="SE0.1" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/simpleSE/CentralitySimilarity.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <method />
@@ -397,18 +399,18 @@
     </configuration>
     <list size="5">
       <item index="0" class="java.lang.String" itemvalue="Python.graphOps_DBLP" />
-      <item index="1" class="java.lang.String" itemvalue="Python.write2DB_DBLP" />
-      <item index="2" class="java.lang.String" itemvalue="Python.getSimilarity" />
-      <item index="3" class="java.lang.String" itemvalue="Python.CentralitySimilarity" />
-      <item index="4" class="java.lang.String" itemvalue="Python.CS_Evaluation" />
+      <item index="1" class="java.lang.String" itemvalue="Python.getSimilarity" />
+      <item index="2" class="java.lang.String" itemvalue="Python.CentralitySimilarity" />
+      <item index="3" class="java.lang.String" itemvalue="Python.CS_Evaluation" />
+      <item index="4" class="java.lang.String" itemvalue="Python.CentralitySimilarity (1)" />
     </list>
     <recent_temporary>
       <list size="5">
         <item index="0" class="java.lang.String" itemvalue="Python.CS_Evaluation" />
-        <item index="1" class="java.lang.String" itemvalue="Python.CentralitySimilarity" />
-        <item index="2" class="java.lang.String" itemvalue="Python.getSimilarity" />
-        <item index="3" class="java.lang.String" itemvalue="Python.graphOps_DBLP" />
-        <item index="4" class="java.lang.String" itemvalue="Python.write2DB_DBLP" />
+        <item index="1" class="java.lang.String" itemvalue="Python.CentralitySimilarity (1)" />
+        <item index="2" class="java.lang.String" itemvalue="Python.CentralitySimilarity" />
+        <item index="3" class="java.lang.String" itemvalue="Python.getSimilarity" />
+        <item index="4" class="java.lang.String" itemvalue="Python.graphOps_DBLP" />
       </list>
     </recent_temporary>
   </component>
@@ -426,27 +428,27 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="55" y="24" width="1225" height="696" extended-state="6" />
+    <frame x="55" y="52" width="1215" height="638" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3411371" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25374377" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2558725" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32943144" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32850242" sideWeight="0.50938773" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32943144" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3979933" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32441473" sideWeight="0.49061224" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Thumbnails" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32852563" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
@@ -474,6 +476,7 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="e#88#109#0" expanded="true" />
+            <element signature="e#294#796#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -485,6 +488,7 @@
           <folding>
             <element signature="e#226#518#0" expanded="false" />
             <element signature="e#564#1674#0" expanded="false" />
+            <element signature="e#1751#2523#0" expanded="false" />
             <element signature="e#2565#2585#0" expanded="false" />
           </folding>
         </state>
@@ -504,9 +508,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="10" column="25" selection-start-line="10" selection-start-column="25" selection-end-line="10" selection-end-column="25" />
-          <folding>
-            <element signature="e#25#46#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -516,6 +517,7 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="e#88#109#0" expanded="true" />
+            <element signature="e#294#796#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -527,6 +529,7 @@
           <folding>
             <element signature="e#226#518#0" expanded="false" />
             <element signature="e#564#1674#0" expanded="false" />
+            <element signature="e#1751#2523#0" expanded="false" />
             <element signature="e#2565#2585#0" expanded="false" />
           </folding>
         </state>
@@ -560,9 +563,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="38" column="0" selection-start-line="38" selection-start-column="0" selection-end-line="38" selection-end-column="0" />
-          <folding>
-            <element signature="e#25#46#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -572,6 +572,7 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="e#88#109#0" expanded="true" />
+            <element signature="e#294#796#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -611,9 +612,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="38" column="0" selection-start-line="38" selection-start-column="0" selection-end-line="38" selection-end-column="0" />
-          <folding>
-            <element signature="e#25#46#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -652,9 +650,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="58" column="0" selection-start-line="58" selection-start-column="0" selection-end-line="58" selection-end-column="0" />
-          <folding>
-            <element signature="e#25#46#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -686,9 +681,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="58" column="0" selection-start-line="58" selection-start-column="0" selection-end-line="58" selection-end-column="0" />
-          <folding>
-            <element signature="e#25#46#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -720,9 +712,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="58" column="0" selection-start-line="58" selection-start-column="0" selection-end-line="58" selection-end-column="0" />
-          <folding>
-            <element signature="e#25#46#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -824,13 +813,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/data/test.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="5" column="3" selection-start-line="5" selection-start-column="3" selection-end-line="5" selection-end-column="3" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/simpleSE/graphOps_DBLP.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="1.0427808">
@@ -852,6 +834,13 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/simpleSE/searchDBLP.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="10" column="25" selection-start-line="10" selection-start-column="25" selection-end-line="10" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/simpleSE/write2DB_DBLP.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -862,34 +851,33 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/simpleSE/searchDBLP.py">
+    <entry file="file://$PROJECT_DIR$/data/test.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.13204226">
+          <caret line="5" column="3" selection-start-line="5" selection-start-column="3" selection-end-line="5" selection-end-column="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/simpleSE/CentralitySimilarity.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="10" column="25" selection-start-line="10" selection-start-column="25" selection-end-line="10" selection-end-column="25" />
+          <caret line="109" column="41" selection-start-line="109" selection-start-column="41" selection-end-line="109" selection-end-column="41" />
           <folding>
-            <element signature="e#25#46#0" expanded="true" />
+            <element signature="e#226#518#0" expanded="false" />
+            <element signature="e#564#1674#0" expanded="false" />
+            <element signature="e#1751#2523#0" expanded="false" />
+            <element signature="e#2565#2585#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/simpleSE/CS_Evaluation.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="23" column="0" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.9235294">
+          <caret line="51" column="17" selection-start-line="51" selection-start-column="17" selection-end-line="51" selection-end-column="17" />
           <folding>
             <element signature="e#88#109#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/simpleSE/CentralitySimilarity.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.55457747">
-          <caret line="62" column="16" selection-start-line="62" selection-start-column="16" selection-end-line="62" selection-end-column="16" />
-          <folding>
-            <element signature="e#226#518#0" expanded="false" />
-            <element signature="e#564#1674#0" expanded="false" />
-            <element signature="e#2565#2585#0" expanded="false" />
+            <element signature="e#294#796#0" expanded="false" />
           </folding>
         </state>
       </provider>

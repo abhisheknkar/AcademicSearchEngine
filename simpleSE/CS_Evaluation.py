@@ -23,12 +23,13 @@ def getValidPapers(minIn=20, minOut=20):
     return validID
 
 def getSimilaritywrtNode(node1, maxdist=3, alpha=0.5):
+    genCocitations = getGeneralizedCocitation(graph, node1, maxdist, maxdist)
     simdict = {}
-    reachables = nodeAtHops(graph,node1,0,maxdist,[],{},reverse=True)
-    for node2 in reachables:
-        # print node1, node2, str(time.time() - time_start) + " seconds."
-        sim = 0
-        simdict[node2] = sim
+    for node2 in genCocitations:
+        if node2 not in simdict:
+            simdict[node2] = 0
+        for path in genCocitations[node2]:
+            simdict[node2] += alpha**(len(path)-1)
     return simdict
 
 if __name__ == "__main__":
@@ -48,5 +49,5 @@ if __name__ == "__main__":
         for paper in validID[field]:
             print "Computing similarity for " + paper
             SimDict[paper] = getSimilaritywrtNode(paper)
-
+    print SimDict
     print "Finished in " + str(time.time() - time_start) + " seconds."
