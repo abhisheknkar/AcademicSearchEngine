@@ -84,6 +84,16 @@ def saveDomainWiseTable():
     con.commit()
     con.close()
 
+def getPaper2FieldMap():
+    with open('data/domainWiseDBLP.pickle', 'rb') as handle:
+            (domainGraph, domainContents, domainabstracts) = pickle.load(handle)
+    paper2Field = {}
+    for field in domainContents:
+        for paper in domainContents[field]:
+            paper2Field[paper] = field
+    with open('data/paper2Field.pickle', 'wb') as handle:
+        pickle.dump(paper2Field, handle)
+
 def saveAllTable():
     saveFlag = True
     con = mdb.connect('localhost', 'abhishek', 'Pass@1234', 'aminerV7');
@@ -117,6 +127,6 @@ def saveAllTable():
 if __name__=="__main__":
     time_start = time.time()
     # saveDomainWiseTable()
-    saveAllTable()
-
+    # saveAllTable()
+    # getPaper2FieldMap()
     print "Finished in " + str(time.time() - time_start) + " seconds."
