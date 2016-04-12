@@ -25,16 +25,52 @@ def getValidPapers(minIn=20, minOut=20):
 
 def getSimilaritywrtNode(node1, maxDist=3, alpha=0.5):
     genCocitations = getGeneralizedCocitation(graph, node1, maxDist, maxDist)
-    simdict = {}
+    print "XXX"
+    genSharedRefs = getGeneralizedCocitation(graph, node1, maxDist, maxDist, reverse=True)
+    print "YYY"
+    simdictCC = {}
+    simdictSR = {}
     for node2 in genCocitations:
-        if node2 not in simdict:
-            simdict[node2] = 0
+        if node2 not in simdictCC:
+            simdictCC[node2] = 0
         for path in genCocitations[node2]:
-            simdict[node2] += alpha**(len(path)-1)
-    return simdict
+            simdictCC[node2] += alpha**(len(path)-1)
+    for node2 in genSharedRefs:
+        if node2 not in simdictSR:
+            simdictSR[node2] = 0
+        for path in genSharedRefs[node2]:
+            simdictSR[node2] += alpha**(len(path)-1)
+    return (simdictCC, simdictSR)
+
+def getGeneralizedCocitation2(G,start,maxhops1=1, maxhops2=1, alpha=0.5, reverse=False):
+    reachables1 = nodeAtHops(G,start,0,maxhops1,[],{},reverse=not(reverse))
+    genCocitations = {}
+    count = 0
+    for node1 in reachables1:
+        count += 1
+        print str(count) + " out of " + str(len(reachables1))
+        reachables2 = nodeAtHops(G,node1,0,maxhops1,[],{},reverse=reverse)
+        for node2 in reachables2:
+            if node2 not in genCocitations:
+                genCocitations[node2] = 0
+            if start == node2:
+                continue
+            paths = []
+            for path1 in reachables1[node1]:
+                for path2 in reachables2[node2]:
+                    finpath = path1 + path2[1:]
+                    genCocitations[node2] += alpha**(len(finpath)-1)
+    return genCocitations
+
+def getSimilaritywrtNode2(node1, maxDist=3, alpha=0.5):
+    simdictCC = getGeneralizedCocitation2(graph, node1, maxDist, maxDist, alpha)
+    simdictSR = getGeneralizedCocitation2(graph, node1, maxDist, maxDist, alpha, reverse=True)
+    return (simdictCC, simdictSR)
 
 def clusterMetric(saveSimDictFlag=False, topK=50, maxDist=3, simDictLoc='data/SimDict.pickle', p2FMaploc='data/paper2Field.pickle'):
     validID = getValidPapers(minIn=topK, minOut=topK)
+    SimDictCC = {}
+    SimDictSR = {}
     SimDict = {}
 
     with open(p2FMaploc, 'rb') as handle:
@@ -45,12 +81,24 @@ def clusterMetric(saveSimDictFlag=False, topK=50, maxDist=3, simDictLoc='data/Si
             for paper in validID[field]:
                 count = count + 1
                 print "Computing similarity for " + paper + " " + str(count)
-                SimDict[paper] = getSimilaritywrtNode(paper, maxDist=maxDist)
-        with open(simDictLoc, 'wb') as handle:
-            pickle.dump(SimDict, handle)
+                (SimDictCC[paper], SimDictSR[paper]) = getSimilaritywrtNode2(paper, maxDist=maxDist)
+                keySet = set(SimDictCC[paper]).union(set(SimDictSR[paper])).union(set(graph.successors(paper))).union(graph.predecessors(paper))
+                SimDict[paper] = dict([(key,0) for key in keySet])
+                for key in SimDictCC[paper]:
+                    SimDict[paper][key] += SimDictCC[paper][key]
+                for key in SimDictSR[paper]:
+                    SimDict[paper][key] += SimDictSR[paper][key]
+                for key in graph.successors(paper):
+                    SimDict[paper][key] += 1
+                for key in graph.predecessors(paper):
+                    SimDict[paper][key] += 1
+
+            with open(simDictLoc, 'wb') as handle:
+                pickle.dump((SimDictCC, SimDictSR, SimDict), handle)
 
     with open(simDictLoc, 'rb') as handle:
-        SimDict = pickle.load(handle)
+        (SimDictCC, SimDictSR, SimDict) = pickle.load(handle)
+
     SortedSimDict = {}
     percentageMatch = {}
     for key in SimDict:
@@ -67,9 +115,20 @@ def clusterMetric(saveSimDictFlag=False, topK=50, maxDist=3, simDictLoc='data/Si
             print key, percentageMatch[key]
     return percentageMatch
 
-if __name__ == "__main__":
-    time_start = time.time()
-    topK = 40
+def computeAvgPrecision(input, till):
+    currSum = 0
+    precisionVec = []
+    for i in range(0,till):
+        currSum += input[i]
+        precisionVec.append(float(currSum) / (i+1))
+    precisionVec = [a*b for a,b in zip(precisionVec,input[0:till])]
+    MAP = np.sum(precisionVec) / np.sum(input)
+    print precisionVec
+    return MAP
+
+def getSimDictforQueries():
+    global domaingraph, domainContents, domainabstracts, graph, contents
+    topK = 50
     maxDist = 3
     with open('data/domainWiseDBLP.pickle', 'rb') as handle:
         (domaingraph, domainContents, domainabstracts) = pickle.load(handle)
@@ -78,12 +137,20 @@ if __name__ == "__main__":
     with open('data/allDBLP.pickle', 'rb') as handle:
        (graph, contents) = pickle.load(handle)
     pM3 = clusterMetric(saveSimDictFlag=True, topK=topK, maxDist=maxDist, simDictLoc='data/SimDict_' +str(topK) + '_' + str(maxDist) + '.pickle', p2FMaploc='data/paper2Field.pickle')
-    pM1 = clusterMetric(saveSimDictFlag=False, topK=topK, maxDist=1, simDictLoc='data/SimDict_' + str(topK) + '_1.pickle', p2FMaploc='data/paper2Field.pickle')
+    pM1 = clusterMetric(saveSimDictFlag=True, topK=topK, maxDist=1, simDictLoc='data/SimDict_' + str(topK) + '_1.pickle', p2FMaploc='data/paper2Field.pickle')
+    # pM3 = clusterMetric(saveSimDictFlag=True, topK=topK, maxDist=maxDist, simDictLoc='data/SMALL/SimDict_' +str(topK) + '_' + str(maxDist) + '.pickle', p2FMaploc='data/paper2Field.pickle')
+    # pM1 = clusterMetric(saveSimDictFlag=True, topK=topK, maxDist=1, simDictLoc='data/SMALL/SimDict_' + str(topK) + '_1.pickle', p2FMaploc='data/paper2Field.pickle')
 
+    # with open('results/SMALL/Comparison_' + str(topK) + 'vs1.txt', 'wb') as handle:
     with open('results/Comparison_' + str(topK) + 'vs1.txt', 'wb') as handle:
         for key in pM3:
             if key in pM1:
                 handle.write(key + '\t' + str(pM3[key]) + '\t' + str(pM1[key]) + '\n')
     handle.close()
+
+if __name__ == "__main__":
+    time_start = time.time()
+
+
 
     print "Finished in " + str(time.time() - time_start) + " seconds."

@@ -89,12 +89,12 @@ def nodeAtHops(G,start,currhops=0,maxhops=1, visited=[], dir2nodes={}, reverse=F
     return dir2nodes
 
 def getGeneralizedCocitation(G,start,maxhops1=1, maxhops2=1, reverse=False):
-    reachables1 = nodeAtHops(G,start,0,maxhops1,[],{},reverse=True)
+    reachables1 = nodeAtHops(G,start,0,maxhops1,[],{},reverse=not(reverse))
     genCocitations = {}
     for node1 in reachables1:
-        reachables2 = nodeAtHops(G,node1,0,maxhops1,[],{},reverse=False)
+        reachables2 = nodeAtHops(G,node1,0,maxhops1,[],{},reverse=reverse)
         for node2 in reachables2:
-            if node1 == node2:
+            if start == node2:
                 continue
             paths = []
             for path1 in reachables1[node1]:
@@ -107,7 +107,7 @@ if __name__ == "__main__":
     filename = '../data/test.txt'
 
     G = nx.read_adjlist(filename, create_using=nx.DiGraph())
-    S = getGeneralizedCocitation(G,u'4', 3, 3)
+    S = getGeneralizedCocitation(G,u'1', 3, 3, reverse=False)
     print S
 
     # S = computeSimilarityPair(G,node1=u'4',node2=u'5',maxdist=3, disjoint=True)
