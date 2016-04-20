@@ -10,10 +10,12 @@ import time
 import operator
 import os
 import MySQLdb as mdb
-import random
-import shutil
+from random import randint
 
 def getValidPapers(minIn=20, minOut=20):
+    print "Loading Data..."
+    print "Data loaded..." + str(time.time() - time_start) + " seconds."
+    print "Getting valid papers..." + str(time.time() - time_start) + " seconds."
     validID = {}
     for key in domainContents:
         for node in domainContents[key]:
@@ -22,13 +24,6 @@ def getValidPapers(minIn=20, minOut=20):
                     validID[key] = []
                 validID[key].append(node)
 
-    return validID
-
-def getValidPapersUnsegregated(minIn=20, minOut=20):
-    validID = []
-    for node in graph:
-        if len(graph.neighbors(node)) >= minIn and len(graph.predecessors(node)) >= minOut:
-            validID.append(node)
     return validID
 
 def getSimilaritywrtNode(node1, maxDist=3, alpha=0.5):
@@ -71,43 +66,6 @@ def getGeneralizedCocitation2(G,start,maxhops1=1, maxhops2=1, alpha=0.5, reverse
                         continue
                     genCocitations[node2] += alpha**(len(finpath)-1)
     return genCocitations
-
-def writeGeneralizedCocitation(G,folder,start,maxhops1=1, maxhops2=1, reverse=False):
-    reachables1 = nodeAtHops(G,start,0,maxhops1,[],{},reverse=not(reverse))
-    genCocitations = {}
-    count = 0
-    if reverse:
-        if os.path.exists(folder + start + '/' + 'BC'):
-            shutil.rmtree(folder + start + '/' + 'BC')
-        os.makedirs(folder + start + '/' + 'BC')
-    else:
-        if os.path.exists(folder + start + '/' + 'CC'):
-            shutil.rmtree(folder + start + '/' + 'CC')
-        os.makedirs(folder + start + '/' + 'CC')
-
-    for node1 in reachables1:
-        count += 1
-        # print str(count) + " out of " + str(len(reachables1))
-        reachables2 = nodeAtHops(G,node1,0,maxhops1,[],{},reverse=reverse)
-        for node2 in reachables2:
-            if reverse:
-                file2write = folder + start + '/' + 'BC/' + node2 + '.txt'
-            else:
-                file2write = folder + start + '/' + 'CC/' + node2 + '.txt'
-            f = open(file2write,'a')
-
-            if node2 not in genCocitations:
-                genCocitations[node2] = 0
-            if start == node2:
-                continue
-            paths = []
-            for path1 in reachables1[node1]:
-                for path2 in reachables2[node2]:
-                    finpath = path1 + path2[1:]
-                    if len(finpath)-1>4:
-                        continue
-                    f.write(str(finpath) + '\n')
-    f.close()
 
 def getSimilaritywrtNode2(graph, node1, maxDist=3, alpha=0.5):
     simdictCC = getGeneralizedCocitation2(graph, node1, maxDist, maxDist, alpha)
@@ -174,7 +132,7 @@ def computeAvgPrecision(input, till):
 
 def getSimDictforQueries(topK=20, maxDist=3, alpha=0.5, SMALLflag=True):
     global domaingraph, domainContents, domainabstracts, graph, contents
-    print topK, maxDist, alpha
+    print topK, maxDist, alpha, SMALLflag
     with open('data/domainWiseDBLP.pickle', 'rb') as handle:
         (domaingraph, domainContents, domainabstracts) = pickle.load(handle)
     if SMALLflag == True:
@@ -222,7 +180,7 @@ def callMAPCluster(foldername, outfile, maxlines=1000):
         f.close()
 
 
-    # print "Computing average precision..."
+    print "Computing average precision..."
     f = open(outfile, 'w')
     for key in MAPdict:
         MAPvals[key] = computeAvgPrecision(MAPdict[key], till=len(MAPdict[key]))
@@ -252,7 +210,7 @@ def callMAP(foldername, outfile, col, relevant, ignore, maxlines=1000):
             if count > maxlines:
                 break
             linesplit = line.split()
-            # print linesplit, col
+            print linesplit, col
             if linesplit[col] in relevant:
                 MAPdict[file].append(1)
             if linesplit[col] in ignore:
@@ -262,7 +220,7 @@ def callMAP(foldername, outfile, col, relevant, ignore, maxlines=1000):
                 MAPdict[file].append(0)
         f.close()
 
-    # print "Computing average precision..."
+    print "Computing average precision..."
     f = open(outfile, 'w')
     for key in MAPdict:
         MAPvals[key] = computeAvgPrecision(MAPdict[key], till=len(MAPdict[key]))
@@ -270,38 +228,6 @@ def callMAP(foldername, outfile, col, relevant, ignore, maxlines=1000):
     f.close()
     return MAPdict
 
-def callMAPRefPred(filepath, outfile, col, relevant, ignore, maxlines=1000):
-    MAPdict = {}
-    MAPvals = {}
-    # print "Parsing file:"
-    f = open(filepath,'r')
-    count = 0
-    MAPdict[filepath] = []
-    for line in f.readlines():
-        count += 1
-        if count == 1:
-            continue
-        if count > maxlines:
-            break
-        linesplit = line.split()
-        # print linesplit, col
-        # print linesplit[col], linesplit[col] in relevant
-        if linesplit[col] in relevant:
-            MAPdict[filepath].append(1)
-        if linesplit[col] in ignore:
-            continue
-        else:
-            # linesplit[1] == irrelevant:
-            MAPdict[filepath].append(0)
-    f.close()
-
-    # print "Computing average precision..."
-    f = open(outfile, 'a')
-    for key in MAPdict:
-        MAPvals[key] = computeAvgPrecision(MAPdict[key], till=len(MAPdict[key]))
-        f.write(key + "\t" + str(MAPvals[key]) + "\n")
-    f.close()
-    return MAPdict
 
 def compareMAPS(foldername):
     f1 = open(foldername + '/new.txt','r')
@@ -353,7 +279,7 @@ def SimDict2RankedList(simDictLoc, outputFolder, topK=20, maxDist=3, type='new',
         #         os.makedirs("results/queryWise/" + type + '/'+ 'ALL' + "/")
         #     f = open("results/queryWise/" + type + '/'+ 'ALL' + "/" + key + ".txt", "wb")
         f.write("Current paper: " + key + "; Cluster: " + paper2FieldMap[key] + '\n')
-        # print "Current paper: " + key + "; Cluster: " + paper2FieldMap[key]
+        print "Current paper: " + key + "; Cluster: " + paper2FieldMap[key]
         SortedSimDict[key] = sorted(SimDict[key].items(), key=operator.itemgetter(1),reverse=True)
         currCluster = paper2FieldMap[key]
         matches = 0
@@ -464,10 +390,7 @@ def referencePrediction(topK, maxDist, alpha, predictPercent, con, paper, trial,
     for index in toRemove:
         removeRef = refs[index]
         if removeRef in graphMod:
-            if removeRef in graphMod[paper]:
-                graphMod.remove_edge(paper, removeRef)
-            else:
-                print "NE"
+            graphMod.remove_node(removeRef)
 
     for recentPaper in recentPapers:
         recentID = str(recentPaper[0])
@@ -489,19 +412,12 @@ def referencePrediction(topK, maxDist, alpha, predictPercent, con, paper, trial,
     else:
         type = 'new'
     SimDict2RankedList(simDictLoc, 'results/refpred/' + str(alpha) + '/trial' + str(trial) + '/',
-            topK, maxDist, type=type, smallflag=True, limitTo=1000)
+            topK, maxDist, type=type, smallflag=True, limitTo=len(refs))
 
     foldername = 'results/refpred/' + str(alpha) + '/trial' + str(trial) + '/' + type + '/'
-    outFile = 'results/refpred/' + str(alpha) + '/trial' + str(trial) + '/' + type + '.txt'
+    outFile = foldername + type + '.txt'
     relevant = set([refs[x] for x in toRemove])
-    # print relevant
-
-    # for id in relevant:
-    #     print paper, id, str(computeSimilarityPair(graphMod, paper, id, maxDist, alpha, disjoint=False))
-
-    rankedListPath = 'results/refpred/' + str(alpha) + '/trial' + str(trial) + '/' + type + '/' + paper + '.txt'
-
-    callMAPRefPred(rankedListPath, outFile, 0, relevant, [], maxlines=100) #***
+    callMAP(foldername, outFile, 2, relevant, [], maxlines=1000)
 
 def mergeSimDictsCCSR(SimDictCC, SimDictSR, graph, paper):
     SimDict = {}
@@ -515,7 +431,6 @@ def mergeSimDictsCCSR(SimDictCC, SimDictSR, graph, paper):
         SimDict[key] += 1
     for key in graph.predecessors(paper):
         SimDict[key] += 1
-    # print "YOYO: " + paper + '; Length: ' + str(len(SimDict))
     return SimDict
 
 def callReferencePrediction(topK, maxDist, alpha, predictPercent=20, trial=0):
@@ -523,102 +438,35 @@ def callReferencePrediction(topK, maxDist, alpha, predictPercent=20, trial=0):
     loadGraphs(smallflag=True)
     validID = getValidPapers(minIn=topK, minOut=topK)
 
-    if os.path.exists('results/refpred/' + str(alpha) + '/trial' + str(trial)):
-        shutil.rmtree('results/refpred/' + str(alpha) + '/trial' + str(trial))
-
-    if not os.path.exists('results/refpred/' + str(alpha) + '/trial' + str(trial) + '/simDicts/'):
-        # os.makedirs('results/refpred/' + str(alpha) + '/trial' + str(trial))
+    if not os.path.exists('results/refpred/' + str(alpha) + '/trial' + str(trial)):
+        os.makedirs('results/refpred/' + str(alpha) + '/trial' + str(trial))
         os.makedirs('results/refpred/' + str(alpha) + '/trial' + str(trial) + '/simDicts/')
     f = open('results/refpred/' + str(alpha) + '/trial' + str(trial) + '/params.txt', 'wb')
     f.write('topK=' + str(topK) + '\nmaxDist=' + str(maxDist) + '\nalpha=' + str(alpha) + '\npredictPercent=' + str(predictPercent))
     f.close()
+
     count = 0
     for field in validID:
         for paper in validID[field]:
             count += 1
             print "Getting similarity for: " + paper + "; count = " + str(count)
             refs = graph.successors(paper)
-            # toRemove = [randint(0,len(refs)-1) for x in range(0,int((predictPercent*len(refs)/100)))]
-            toRemove = random.sample(range(0,len(refs)-1),int((predictPercent*len(refs)/100)))
+            toRemove = [randint(0,len(refs)-1) for x in range(0,int((predictPercent*len(refs)/100)))]
             referencePrediction(topK, maxDist, alpha, predictPercent, con, paper, trial, toRemove)
             referencePrediction(topK, 1, alpha, predictPercent, con, paper, trial, toRemove)
-
-def ReferencePredictionMain():
-    for alpha in [0.1,0.3,0.5,0.7,0.9]:
-        for trial in range(0,20):
-            print "Current iteration: ", alpha, trial
-            callReferencePrediction(topK=30, maxDist=3, alpha=alpha, predictPercent=20, trial=trial)
-
-def ReferencePredictionAggregation():
-    files = [0,0]
-    rawscores = {'baseline':{}, 'new':{}}
-    zeroCount = {'baseline':{}, 'new':{}}
-    types = ['baseline', 'new']
-    summaryscores = {'baseline':{}, 'new':{}}
-    alphas = [0.1,0.3,0.5,0.7,0.9]
-    for alpha in alphas:
-        for trial in range(0,20):
-            files[0] = 'results/refpred/' + str(alpha) + '/trial' + str(trial) + '/baseline.txt'
-            files[1] = 'results/refpred/' + str(alpha) + '/trial' + str(trial) + '/new.txt'
-            for idx,file in enumerate(files):
-                f = open(file,'r')
-                for line in f.readlines():
-                    linesplit = line.split()
-                    paper = linesplit[0][linesplit[0].rfind('/')+1:-4]
-                    if paper not in zeroCount[types[idx]]:
-                        zeroCount[types[idx]][paper] = 0
-                    if paper not in rawscores[types[idx]]:
-                        rawscores[types[idx]][paper] = {}
-                    if alpha not in rawscores[types[idx]][paper]:
-                        rawscores[types[idx]][paper][alpha] = []
-                    if linesplit[1] == 'nan':
-                        score = 0
-                        zeroCount[types[idx]][paper] += 1
-                    else:
-                        score = float(linesplit[1])
-
-                    rawscores[types[idx]][paper][alpha].append(score)
-                f.close()
-
-    for type in types:
-        for paper in rawscores[type]:
-            summaryscores[type][paper] = []
-            # print paper
-            for alpha in alphas:
-                # summaryscores[paper].append((np.mean(rawscores[paper][alpha]), np.std(rawscores[paper][alpha])))
-                summaryscores[type][paper].append(np.mean(rawscores[type][paper][alpha]))
-            # print summaryscores[type][paper]
-
-    f = open('results/refpred/summary.txt','w')
-    for paper in rawscores['baseline']:
-        f.write("Paper: " + paper + '\n')
-        f.write("Baseline: " + str(summaryscores['baseline'][paper]) + "\n")
-        f.write("New: " + str(summaryscores['new'][paper]) + "\n\n")
-
-    f.write("ZeroCount: " + str(zeroCount))
-
-def getSimPathsInFile(maxDist=3, minLinks=5, smallflag=True, numberOfQueries=10):
-    loadGraphs(smallflag)
-    if smallflag:
-        folder='data/simPaths/SMALL/maxDist='+str(maxDist) + '/'
-    else:
-        folder='data/simPaths/BIG/maxDist='+str(maxDist) + '/'
-    if not os.path.exists(folder):
-        os.makedirs(folder)
-
-    validIDs = getValidPapersUnsegregated(minLinks,minLinks)
-    allValidPaps = []
-    queryIDs = random.sample(range(0,len(validIDs)-1), numberOfQueries)
-    for idx, queryID in enumerate(queryIDs):
-        query = validIDs[queryID]
-        print idx, query
-        writeGeneralizedCocitation(graph,folder,query,maxDist, maxDist, reverse=False)
-        writeGeneralizedCocitation(graph,folder,query,maxDist, maxDist, reverse=True)
 
 if __name__ == "__main__":
     time_start = time.time()
 
-    getSimPathsInFile(maxDist=3, minLinks=5, smallflag=False, numberOfQueries=50)
+    # callReferencePrediction(topK=50, maxDist=3, alpha=0.5, trial=0)
+    getSimDictforQueries(topK=20, maxDist=3, alpha=0.1, SMALLflag=True)
+    getSimDictforQueries(topK=20, maxDist=3, alpha=0.3, SMALLflag=True)
+    getSimDictforQueries(topK=20, maxDist=3, alpha=0.7, SMALLflag=True)
+    getSimDictforQueries(topK=20, maxDist=3, alpha=0.9, SMALLflag=True)
+
+    getSimDictforQueries(topK=50, maxDist=3, alpha=0.3, SMALLflag=False)
+    getSimDictforQueries(topK=50, maxDist=3, alpha=0.5, SMALLflag=False)
+    getSimDictforQueries(topK=50, maxDist=3, alpha=0.7, SMALLflag=False)
 
     print "Finished in " + str(time.time() - time_start) + " seconds."
 
@@ -628,3 +476,15 @@ if __name__ == "__main__":
 # SimDict2RankedList() #Gets a ranked list corresponding to a similarity dictionary
 # callMAP() #Analyzes the ranked list and gets average precision
 # compareMAPS() #Compares 2 maps
+
+    # TO RUN:
+
+    # getSimDictforQueries(topK=50, maxDist=3, alpha=0.1, SMALLflag=False)
+    # getSimDictforQueries(topK=50, maxDist=3, alpha=0.3, SMALLflag=False)
+    # getSimDictforQueries(topK=50, maxDist=3, alpha=0.5, SMALLflag=False)
+    # getSimDictforQueries(topK=50, maxDist=3, alpha=0.7, SMALLflag=False)
+
+    # getSimDictforQueries(topK=20, maxDist=3, alpha=0.1, SMALLflag=True)
+    # getSimDictforQueries(topK=20, maxDist=3, alpha=0.3, SMALLflag=True)
+    # getSimDictforQueries(topK=20, maxDist=3, alpha=0.7, SMALLflag=True)
+    # getSimDictforQueries(topK=20, maxDist=3, alpha=0.9, SMALLflag=True)

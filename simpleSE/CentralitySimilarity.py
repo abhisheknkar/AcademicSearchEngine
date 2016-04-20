@@ -44,7 +44,7 @@ def computeSimilarityAll(G, maxdist=3):
                             S[dest2][dest1] += toadd
     return S
 
-def computeSimilarityPair(G, node1, node2, maxdist=3, disjoint=False):
+def computeSimilarityPair(G, node1, node2, maxdist, alpha, disjoint=False):
     reachables1 = nodeAtHops(G,node1,0,maxdist,[],{},reverse=True) #Get all paths reachable from node1 of length less than max
     reachables2 = nodeAtHops(G,node2,0,maxdist,[],{},reverse=True) #Get all paths reachable from node2 of length less than max
 
@@ -59,7 +59,7 @@ def computeSimilarityPair(G, node1, node2, maxdist=3, disjoint=False):
                         continue
                 totalLength = len(path1) + len(path2) - 2
                 # print path1, path2
-                sim12 += len2simFunc(totalLength, 0.5)
+                sim12 += len2simFunc(totalLength, alpha)
     return sim12
 
 def len2simFunc(length, alpha=0.5):

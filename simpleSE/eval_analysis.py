@@ -8,6 +8,8 @@ import cPickle as pickle
 import time
 import operator
 
+with open('data/allDBLP.pickle', 'rb') as handle:
+   (graph, contents) = pickle.load(handle)
 topK = 50
 maxDist = 3
 simDictLoc='data/SimDict_' +str(topK) + '_' + str(maxDist) + '.pickle'

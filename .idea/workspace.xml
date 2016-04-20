@@ -2,12 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="60bf3af1-97f5-4e18-ba9b-11d049999c5b" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/simpleSE/eval_analysis.py" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/simpleSE/results/Comparison_20_3vs1_SMALL.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/simpleSE/results/Comparison_50_3vs1_20.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/simpleSE/results/Comparison_50_3vs1_50.txt" afterPath="" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/simpleSE/.idea/misc.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/simpleSE/.idea/modules.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/simpleSE/.idea/simpleSE.iml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/simpleSE/.idea/vcs.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/simpleSE/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/simpleSE/CS_Evaluation.py" afterPath="$PROJECT_DIR$/simpleSE/CS_Evaluation.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/simpleSE/CentralitySimilarity.py" afterPath="$PROJECT_DIR$/simpleSE/CentralitySimilarity.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/simpleSE/eval_analysis.py" afterPath="$PROJECT_DIR$/simpleSE/eval_analysis.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="SE0.1.iws" />
@@ -51,45 +52,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CS_Evaluation.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="CS_Evaluation.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/simpleSE/CS_Evaluation.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="153" column="0" selection-start-line="153" selection-start-column="0" selection-end-line="153" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.43313953">
+              <caret line="356" column="0" selection-start-line="356" selection-start-column="0" selection-end-line="356" selection-end-column="0" />
               <folding>
-                <element signature="e#310#812#0" expanded="false" />
-                <element signature="e#873#1533#0" expanded="false" />
-                <element signature="e#1628#2359#0" expanded="false" />
-                <element signature="e#2421#2626#0" expanded="false" />
-                <element signature="e#2765#4736#0" expanded="false" />
-                <element signature="e#4780#5074#0" expanded="false" />
-                <element signature="e#5108#6603#0" expanded="false" />
+                <element signature="e#320#822#0" expanded="false" />
+                <element signature="e#883#1543#0" expanded="false" />
+                <element signature="e#4875#5146#0" expanded="false" />
+                <element signature="e#7049#8299#0" expanded="false" />
+                <element signature="e#8334#9007#0" expanded="false" />
+                <element signature="e#9099#12160#0" expanded="false" />
+                <element signature="e#12240#14364#0" expanded="false" />
+                <element signature="e#14397#14762#0" expanded="false" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CentralitySimilarity.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/simpleSE/CentralitySimilarity.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.56349206">
-              <caret line="96" column="30" selection-start-line="96" selection-start-column="30" selection-end-line="96" selection-end-column="30" />
-              <folding>
-                <element signature="e#226#518#0" expanded="false" />
-                <element signature="e#564#1674#0" expanded="false" />
-                <element signature="e#1751#2523#0" expanded="false" />
-                <element signature="e#2565#2585#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="eval_analysis.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/simpleSE/eval_analysis.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="24" column="26" selection-start-line="24" selection-start-column="26" selection-end-line="24" selection-end-column="26" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -121,8 +98,8 @@
         <option value="$PROJECT_DIR$/simpleSE/graphOps_DBLP.py" />
         <option value="$PROJECT_DIR$/simpleSE/getSimilarity.py" />
         <option value="$PROJECT_DIR$/CentralitySimilarity.py" />
-        <option value="$PROJECT_DIR$/simpleSE/CentralitySimilarity.py" />
         <option value="$PROJECT_DIR$/simpleSE/write2DB_DBLP.py" />
+        <option value="$PROJECT_DIR$/simpleSE/CentralitySimilarity.py" />
         <option value="$PROJECT_DIR$/simpleSE/eval_analysis.py" />
         <option value="$PROJECT_DIR$/simpleSE/CS_Evaluation.py" />
       </list>
@@ -203,24 +180,6 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="simpleSE" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="data" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="SE0.1" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="SE" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
               <option name="myItemId" value="data" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -231,7 +190,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/simpleSE" />
     <property name="FullScreen" value="false" />
     <property name="recentsLimit" value="5" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
@@ -488,14 +447,14 @@
     <frame x="55" y="24" width="1225" height="696" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3411371" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33779263" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32943144" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25374377" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39632106" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32943144" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.31772575" sideWeight="0.49061224" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.31438127" sideWeight="0.49061224" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32850242" sideWeight="0.50938773" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32943144" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -522,7 +481,7 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="10" />
+      <option name="time" value="11" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -562,13 +521,14 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#310#812#0" expanded="false" />
-            <element signature="e#873#1533#0" expanded="false" />
-            <element signature="e#1628#2359#0" expanded="false" />
-            <element signature="e#2421#2626#0" expanded="false" />
-            <element signature="e#2765#4736#0" expanded="false" />
-            <element signature="e#4780#5074#0" expanded="false" />
-            <element signature="e#5108#6603#0" expanded="false" />
+            <element signature="e#320#822#0" expanded="false" />
+            <element signature="e#883#1543#0" expanded="false" />
+            <element signature="e#4875#5146#0" expanded="false" />
+            <element signature="e#7049#8299#0" expanded="false" />
+            <element signature="e#8334#9007#0" expanded="false" />
+            <element signature="e#9099#12160#0" expanded="false" />
+            <element signature="e#12240#14364#0" expanded="false" />
+            <element signature="e#14397#14762#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -622,13 +582,14 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#310#812#0" expanded="false" />
-            <element signature="e#873#1533#0" expanded="false" />
-            <element signature="e#1628#2359#0" expanded="false" />
-            <element signature="e#2421#2626#0" expanded="false" />
-            <element signature="e#2765#4736#0" expanded="false" />
-            <element signature="e#4780#5074#0" expanded="false" />
-            <element signature="e#5108#6603#0" expanded="false" />
+            <element signature="e#320#822#0" expanded="false" />
+            <element signature="e#883#1543#0" expanded="false" />
+            <element signature="e#4875#5146#0" expanded="false" />
+            <element signature="e#7049#8299#0" expanded="false" />
+            <element signature="e#8334#9007#0" expanded="false" />
+            <element signature="e#9099#12160#0" expanded="false" />
+            <element signature="e#12240#14364#0" expanded="false" />
+            <element signature="e#14397#14762#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -907,6 +868,27 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/simpleSE/eval_analysis.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="11" column="3" selection-start-line="11" selection-start-column="3" selection-end-line="11" selection-end-column="3" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/simpleSE/CentralitySimilarity.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="104" column="0" selection-start-line="104" selection-start-column="0" selection-end-line="104" selection-end-column="0" />
+          <folding>
+            <element signature="e#226#518#0" expanded="false" />
+            <element signature="e#564#1674#0" expanded="false" />
+            <element signature="e#1751#2523#0" expanded="false" />
+            <element signature="e#2565#2585#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/simpleSE/searchDBLP.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -917,37 +899,17 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/simpleSE/CS_Evaluation.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="153" column="0" selection-start-line="153" selection-start-column="0" selection-end-line="153" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.43313953">
+          <caret line="356" column="0" selection-start-line="356" selection-start-column="0" selection-end-line="356" selection-end-column="0" />
           <folding>
-            <element signature="e#310#812#0" expanded="false" />
-            <element signature="e#873#1533#0" expanded="false" />
-            <element signature="e#1628#2359#0" expanded="false" />
-            <element signature="e#2421#2626#0" expanded="false" />
-            <element signature="e#2765#4736#0" expanded="false" />
-            <element signature="e#4780#5074#0" expanded="false" />
-            <element signature="e#5108#6603#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/simpleSE/eval_analysis.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="24" column="26" selection-start-line="24" selection-start-column="26" selection-end-line="24" selection-end-column="26" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/simpleSE/CentralitySimilarity.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.56349206">
-          <caret line="96" column="30" selection-start-line="96" selection-start-column="30" selection-end-line="96" selection-end-column="30" />
-          <folding>
-            <element signature="e#226#518#0" expanded="false" />
-            <element signature="e#564#1674#0" expanded="false" />
-            <element signature="e#1751#2523#0" expanded="false" />
-            <element signature="e#2565#2585#0" expanded="false" />
+            <element signature="e#320#822#0" expanded="false" />
+            <element signature="e#883#1543#0" expanded="false" />
+            <element signature="e#4875#5146#0" expanded="false" />
+            <element signature="e#7049#8299#0" expanded="false" />
+            <element signature="e#8334#9007#0" expanded="false" />
+            <element signature="e#9099#12160#0" expanded="false" />
+            <element signature="e#12240#14364#0" expanded="false" />
+            <element signature="e#14397#14762#0" expanded="false" />
           </folding>
         </state>
       </provider>
