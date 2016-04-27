@@ -13,16 +13,15 @@ import MySQLdb as mdb
 import random
 import shutil
 
-def getValidPapers(minIn=20, minOut=20):
-    validID = {}
-    for key in domainContents:
-        for node in domainContents[key]:
-            if len(graph.neighbors(node)) >= minIn and len(graph.predecessors(node)) >= minOut:
-                if key not in validID:
-                    validID[key] = []
-                validID[key].append(node)
-
-    return validID
+def computeAvgPrecision(input, till):
+    currSum = 0
+    precisionVec = []
+    for i in range(0,till):
+        currSum += input[i]
+        precisionVec.append(float(currSum) / (i+1))
+    precisionVec = [a*b for a,b in zip(precisionVec,input[0:till])]
+    MAP = np.sum(precisionVec) / np.sum(input)
+    return MAP
 
 def getValidPapersUnsegregated(minIn=20, minOut=20):
     validID = []
@@ -31,87 +30,52 @@ def getValidPapersUnsegregated(minIn=20, minOut=20):
             validID.append(node)
     return validID
 
-def getSimilaritywrtNode(node1, maxDist=3, alpha=0.5):
-    genCocitations = getGeneralizedCocitation(graph, node1, maxDist, maxDist)
-    print "XXX"
-    genSharedRefs = getGeneralizedCocitation(graph, node1, maxDist, maxDist, reverse=True)
-    print "YYY"
-    simdictCC = {}
-    simdictSR = {}
-    for node2 in genCocitations:
-        if node2 not in simdictCC:
-            simdictCC[node2] = 0
-        for path in genCocitations[node2]:
-            simdictCC[node2] += alpha**(len(path)-1)
-    for node2 in genSharedRefs:
-        if node2 not in simdictSR:
-            simdictSR[node2] = 0
-        for path in genSharedRefs[node2]:
-            simdictSR[node2] += alpha**(len(path)-1)
-    return (simdictCC, simdictSR)
-
-def getGeneralizedCocitation2(G,start,maxhops1=1, maxhops2=1, alpha=0.5, reverse=False):
+def scoreGeneralizedCocitations(G,start,maxhops1=1, maxhops2=1, alpha=0.5, reverse=False, traditionalFlag=False):
     reachables1 = nodeAtHops(G,start,0,maxhops1,[],{},reverse=not(reverse))
     genCocitations = {}
     count = 0
     for node1 in reachables1:
         count += 1
-        # print str(count) + " out of " + str(len(reachables1))
         reachables2 = nodeAtHops(G,node1,0,maxhops1,[],{},reverse=reverse)
         for node2 in reachables2:
-            if node2 not in genCocitations:
-                genCocitations[node2] = 0
             if start == node2:
                 continue
             paths = []
             for path1 in reachables1[node1]:
                 for path2 in reachables2[node2]:
                     finpath = path1 + path2[1:]
-                    if len(finpath)-1>4:
-                        continue
-                    genCocitations[node2] += alpha**(len(finpath)-1)
+                    # if len(finpath)-1>4:
+                    #     continue
+                    if node2 not in genCocitations:
+                        genCocitations[node2] = 0
+                    if traditionalFlag:
+                        genCocitations[node2] += 1
+                    else:
+                        genCocitations[node2] += alpha**(len(finpath)-1)
     return genCocitations
 
-def writeGeneralizedCocitation(G,folder,start,maxhops1=1, maxhops2=1, reverse=False):
-    reachables1 = nodeAtHops(G,start,0,maxhops1,[],{},reverse=not(reverse))
+def saveSimDictforQuery(graph, paper, outputFolder, topK=100, maxDist=3, alpha=0.5, SMALLflag=True, traditionalFlag=False):
+    outputPath = outputFolder + '/' + paper +'.pkl'
+
     count = 0
-    if reverse:
-        if os.path.exists(folder + start + '/' + 'BC'):
-            shutil.rmtree(folder + start + '/' + 'BC')
-        os.makedirs(folder + start + '/' + 'BC')
-    else:
-        if os.path.exists(folder + start + '/' + 'CC'):
-            shutil.rmtree(folder + start + '/' + 'CC')
-        os.makedirs(folder + start + '/' + 'CC')
 
-    for node1 in reachables1:
-        count += 1
-        # print str(count) + " out of " + str(len(reachables1))
-        reachables2 = nodeAtHops(G,node1,0,maxhops1,[],{},reverse=reverse)
-        for node2 in reachables2:
-            if reverse:
-                file2write = folder + start + '/' + 'BC/' + node2 + '.txt'
-            else:
-                file2write = folder + start + '/' + 'CC/' + node2 + '.txt'
+    simDictCC = scoreGeneralizedCocitations(graph, paper, maxDist, maxDist, alpha, traditionalFlag=traditionalFlag)
+    simDictSR = scoreGeneralizedCocitations(graph, paper, maxDist, maxDist, alpha, reverse=True, traditionalFlag=traditionalFlag)
+    with open(outputPath, 'wb') as handle:
+        pickle.dump((simDictCC, simDictSR), handle)
 
-            if start == node2:
-                continue
-            paths = []
-            for path1 in reachables1[node1]:
-                for path2 in reachables2[node2]:
-                    finpath = path1 + path2[1:]
-                    if len(finpath)-1>4:
-                        continue
-                    f = open(file2write,'a')
-                    f.write(str(finpath[1:-1]) + '\n')
-                    f.close()
-
-# def readGeneralizedCocitation(folder, type, )
-
-def getSimilaritywrtNode2(graph, node1, maxDist=3, alpha=0.5):
-    simdictCC = getGeneralizedCocitation2(graph, node1, maxDist, maxDist, alpha)
-    simdictSR = getGeneralizedCocitation2(graph, node1, maxDist, maxDist, alpha, reverse=True)
-    return (simdictCC, simdictSR)
+def mergeSimDictCCSR(SimDictCC, SimDictSR, graph, paper):
+    keySet = set(SimDictCC).union(set(SimDictSR)).union(set(graph.successors(paper))).union(graph.predecessors(paper))
+    SimDict = dict([(key,0) for key in keySet])
+    for key in SimDictCC[paper]:
+        SimDict[key] += SimDictCC[key]
+    for key in SimDictSR[paper]:
+        SimDict[key] += SimDictSR[key]
+    for key in graph.successors(paper):
+        SimDict[key] += 1
+    for key in graph.predecessors(paper):
+        SimDict[key] += 1
+    return SimDict
 
 def clusterMetric(graph, saveSimDictFlag=False, alpha=0.5, topK=50, maxDist=3, simDictLoc='data/SimDict.pickle', p2FMaploc='data/paper2Field.pickle'):
     validID = getValidPapers(minIn=topK, minOut=topK)
@@ -160,41 +124,6 @@ def clusterMetric(graph, saveSimDictFlag=False, alpha=0.5, topK=50, maxDist=3, s
         for key in percentageMatch:
             print key, percentageMatch[key]
     return percentageMatch
-
-def computeAvgPrecision(input, till):
-    currSum = 0
-    precisionVec = []
-    for i in range(0,till):
-        currSum += input[i]
-        precisionVec.append(float(currSum) / (i+1))
-    precisionVec = [a*b for a,b in zip(precisionVec,input[0:till])]
-    MAP = np.sum(precisionVec) / np.sum(input)
-    return MAP
-
-def getSimDictforQueries(topK=20, maxDist=3, alpha=0.5, SMALLflag=True):
-    global domaingraph, domainContents, domainabstracts, graph, contents
-    print topK, maxDist, alpha
-    with open('data/domainWiseDBLP.pickle', 'rb') as handle:
-        (domaingraph, domainContents, domainabstracts) = pickle.load(handle)
-    if SMALLflag == True:
-        with open('data/domainWiseDBLP.pickle', 'rb') as handle:
-            (graph, domainContents, domainabstracts) = pickle.load(handle)
-        pM3 = clusterMetric(graph, saveSimDictFlag=True, alpha=alpha, topK=topK, maxDist=maxDist, simDictLoc='data/SMALL/SimDict_' +str(topK) + '_' + str(maxDist) + '_' + str(alpha) + '.pickle', p2FMaploc='data/paper2Field.pickle')
-        pM1 = clusterMetric(graph, saveSimDictFlag=True, alpha=alpha, topK=topK, maxDist=1, simDictLoc='data/SMALL/SimDict_' + str(topK) + '_1_' + str(alpha) + '.pickle', p2FMaploc='data/paper2Field.pickle')
-        compFileName = 'results/queryWise/SMALL/Comparison_' + str(topK) + 'vs1_' + str(alpha) + '.txt'
-    else:
-        with open('data/allDBLP.pickle', 'rb') as handle:
-           (graph, contents) = pickle.load(handle)
-        pM1 = clusterMetric(graph, saveSimDictFlag=True, alpha=alpha, topK=topK, maxDist=1, simDictLoc='data/SimDict_' + str(topK) + '_1_' + str(alpha) + '.pickle', p2FMaploc='data/paper2Field.pickle')
-        pM3 = clusterMetric(graph, saveSimDictFlag=True, alpha=alpha, topK=topK, maxDist=maxDist, simDictLoc='data/SimDict_' +str(topK) + '_' + str(maxDist) + '_' + str(alpha) + '.pickle', p2FMaploc='data/paper2Field.pickle')
-        compFileName = 'results/queryWise/BIG/Comparison_' + str(topK) + 'vs1_' + str(alpha) + '.txt'
-
-    # with open(compFileName, 'wb') as handle:
-    #     for key in pM3:
-    #         if key in pM1:
-    #             handle.write(key + '\t' + str(pM3[key]) + '\t' + str(pM1[key]) + '\n')
-    # handle.close()
-    # getSimDictforQueries()
 
 def callMAPCluster(foldername, outfile, maxlines=1000):
     files = os.listdir(foldername)
@@ -390,53 +319,15 @@ def SimDict2RankedList(simDictLoc, outputFolder, topK=20, maxDist=3, type='new',
     # SimDict2RankedList(topK=20, maxDist=3, type='new', smallflag=True)
     # SimDict2RankedList(topK=50, maxDist=1, type='baseline', smallflag=False)
 
-def getDistancefromQuery(foldername, outFolder, smallflag, limitTo=1000):
-    if not os.path.exists(outFolder):
-        os.makedirs(outFolder)
+def getAverageDistanceFromQuery(simDict, graph, source, limitTo=100):
     graphUD = graph.to_undirected()
+    sortedSimDict = sorted(simDict.items(), key=operator.itemgetter(1),reverse=True)
 
-    files = os.listdir(foldername)
-    distances = {}
-    allList = []
-    fout = open(outFolder + '/avgDistances.txt', 'wb')
-    for file in files:
-        if not file.endswith('.txt'):
-            continue
-        print "Processing file: " + file
-
-        source = file[0:-4]
-        filepath = foldername + '/' + file
-        f = open(filepath, 'r')
-        count = 0
-        distances[file] = {}
-        for line in f.readlines():
-            count += 1
-            if count % 100 == 0:
-                print "Completed nodes: " + str(count)
-            if count == 1:
-                continue
-            if count > limitTo + 1:
-                break
-            linesplit = line.split()
-            if len(linesplit) != 4:
-                continue
-            dest = linesplit[0]
-            if source in graph and dest in graph:
-                distances[file][dest] = len(nx.shortest_path(graphUD, source, dest)) - 1
-        avgDist = np.mean(distances[file].values())
-        stdDist = np.std(distances[file].values())
-        allList += distances[file].values()
-        fout.write('Source: ' + source + '; Mean Dist: ' + str(avgDist) + '; Std: ' + str(stdDist) + '\n')
-
-        f.close()
-    fout.write('Overall - ' + 'Mean Dist: ' + str(np.mean(allList)) + '; Std: ' + str(np.std(allList)) + '\n')
-    fout.close()
-    with open(outFolder + '/distances.pickle', 'wb') as handle:
-        pickle.dump(distances, handle)
-    # getDistancefromQuery(foldername='results/queryWise/SMALL/new/ALL', outFolder='results/distances/SMALL/new/', smallflag=True, limitTo=1000)
-    # getDistancefromQuery(foldername='results/queryWise/SMALL/baseline/ALL', outFolder='results/distances/SMALL/baseline/', smallflag=True, limitTo=1000)
-    # getDistancefromQuery(foldername='results/queryWise/BIG/baseline/ALL', outFolder='results/distances/BIG/baseline/', smallflag=False, limitTo=1000)
-    # getDistancefromQuery(foldername='results/queryWise/BIG/new/ALL', outFolder='results/distances/BIG/new/', smallflag=False, limitTo=1000)
+    topKsimNodes = zip(*sortedSimDict[0:min(limitTo,len(sortedSimDict))])[0]
+    distances = []
+    for dest in topKsimNodes:
+        distances.append(len(nx.shortest_path(graphUD, source, dest)) - 1)
+    return np.mean(distances)
 
 def loadGraphs(smallflag):
     global graph, contents, domainContents, domainabstracts
@@ -613,11 +504,149 @@ def getSimPathsInFile(maxDist=3, minLinks=5, smallflag=True, numberOfQueries=10)
         print idx, query
         writeGeneralizedCocitation(graph,folder,query,maxDist, maxDist, reverse=False)
         writeGeneralizedCocitation(graph,folder,query,maxDist, maxDist, reverse=True)
+    # getSimPathsInFile(maxDist=3, minLinks=5, smallflag=True, numberOfQueries=50)
+
+def getDistancesForRandomQueries(folderPrefix, outFile, writeflag=True, readflag=False, summaryFile='results/task2Summary.txt'):
+    alphaList = [0.01, 0.05, 0.1, 0.3, 0.5, 0.7, 0.9, 0.99, 'traditional']
+    # alphaList = ['traditional']
+    if writeflag:
+        loadGraphs(smallflag=True)
+
+        DistancesDict = {'CC':{},'SR':{},'merged':{}}
+        if os.path.exists(outFile):
+            with open(outFile, 'r') as handle:
+                DistancesDict = pickle.load(handle)
+
+        for alpha in alphaList:
+            DistancesDict['CC'][str(alpha)] = {}
+            DistancesDict['SR'][str(alpha)] = {}
+            files = os.listdir(folderPrefix+'alpha='+str(alpha))
+            for file in files:
+                source = file[:-4]
+                print alpha, source
+                filepath = folderPrefix + 'alpha='+ str(alpha) + '/' + file
+                with open(filepath, 'rb') as handle:
+                    (simDictCC,simDictSR) = pickle.load(handle)
+                DistancesDict['CC'][str(alpha)][source] = getAverageDistanceFromQuery(simDictCC, graph, source, limitTo=100)
+                DistancesDict['SR'][str(alpha)][source] = getAverageDistanceFromQuery(simDictSR, graph, source, limitTo=100)
+
+        with open(outFile, 'wb') as handle:
+            pickle.dump(DistancesDict, handle)
+    if readflag:
+        # READ THE OUPUTS AND WRITE TO A FILE
+        with open(outFile, 'r') as handle:
+            DistancesDict = pickle.load(handle)
+
+        f = open(summaryFile, 'w')
+        f.write('Alpha\tCC\t\SR\n')
+        for alpha in alphaList:
+            CCs = np.array(DistancesDict['CC'][str(alpha)].values())
+            CCs[np.isnan(CCs)]=0
+            SRs = np.array(DistancesDict['SR'][str(alpha)].values())
+            SRs[np.isnan(SRs)]=0
+
+            CCmean = np.mean(CCs)
+            SRmean = np.mean(SRs)
+
+            f.write(str(alpha) + '\t' + str(CCmean) + '\t' + str(SRmean) + '\n')
+
+def task2CallSequence():
+    # saveSimDictForRandomQueries(smallflag=True, numberOfQueries = 50, minLinks = 5, outputFolderPrefix='/home/csd154server/Abhishek_Narwekar/DDP/ASONAM/simDictSmall/')
+    getDistancesForRandomQueries(folderPrefix='/home/csd154server/Abhishek_Narwekar/DDP/ASONAM/simDictSmall/', outFile='results/avgdistances.pkl', writeflag=False, readflag=True, summaryFile='results/task2Summary.txt')
+
+def task1CallSequence():
+    getClusterScoresForRandomQueries(folderPrefix='/home/csd154server/Abhishek_Narwekar/DDP/ASONAM/simDictSmall/', outFile='results/ClusterMAPs.pkl',  writeflag=False, readflag=True, summaryFile='results/task1Summary.txt')
+
+def getClusterScoresForRandomQueries(folderPrefix='/home/csd154server/Abhishek_Narwekar/DDP/ASONAM/simDictSmall/', outFile='results/ClusterMAPs.pkl',  writeflag=True, readflag=True, summaryFile='results/task1Summary.txt'):
+    alphaList = [0.01, 0.05, 0.1, 0.3, 0.5, 0.7, 0.9, 0.99, 'traditional']
+    # alphaList = ['traditional']
+
+    with open('data/paper2Field.pickle', 'r') as handle:
+        paper2FieldMap = pickle.load(handle)
+
+    if writeflag:
+        loadGraphs(smallflag=True)
+
+        ClusterMAPsGeneralized = {'CC':{},'SR':{},'merged':{}}
+        if os.path.exists(outFile):
+            with open(outFile, 'r') as handle:
+                ClusterMAPsGeneralized = pickle.load(handle)
+
+        for alpha in alphaList:
+            ClusterMAPsGeneralized['CC'][str(alpha)] = {}
+            ClusterMAPsGeneralized['SR'][str(alpha)] = {}
+            files = os.listdir(folderPrefix+'alpha='+str(alpha))
+            for file in files:
+                source = file[:-4]
+                print alpha, source
+                filepath = folderPrefix + 'alpha='+ str(alpha) + '/' + file
+                with open(filepath, 'rb') as handle:
+                    (simDictCC,simDictSR) = pickle.load(handle)
+                ClusterMAPsGeneralized['CC'][str(alpha)][source] = getClusterMAPScoreforSimDict(simDictCC, source, paper2FieldMap, topK=100)
+                ClusterMAPsGeneralized['SR'][str(alpha)][source] = getClusterMAPScoreforSimDict(simDictSR, source, paper2FieldMap, topK=100)
+
+        with open(outFile, 'wb') as handle:
+            pickle.dump(ClusterMAPsGeneralized, handle)
+
+    if readflag:
+        # READ THE OUPUTS AND WRITE TO A FILE
+        with open(outFile, 'r') as handle:
+            ClusterMAPsGeneralized = pickle.load(handle)
+
+        f = open(summaryFile, 'w')
+        f.write('Alpha\tCC\t\SR\n')
+        for alpha in alphaList:
+            CCs = np.array(ClusterMAPsGeneralized['CC'][str(alpha)].values())
+            CCs[np.isnan(CCs)]=0
+            SRs = np.array(ClusterMAPsGeneralized['SR'][str(alpha)].values())
+            SRs[np.isnan(SRs)]=0
+
+            CCmean = np.mean(CCs)
+            SRmean = np.mean(SRs)
+            f.write(str(alpha) + '\t' + str(CCmean) + '\t' + str(SRmean) + '\n')
+
+def getClusterMAPScoreforSimDict(SimDict, currPaper, paper2FieldMap, topK):
+    SortedSimDict = sorted(SimDict.items(), key=operator.itemgetter(1),reverse=True)
+    currCluster = paper2FieldMap[currPaper]
+    relevanceVec = []
+    for i in range(0,min(topK, len(SortedSimDict))):
+        if SortedSimDict[i][0] in paper2FieldMap:
+            if paper2FieldMap[SortedSimDict[i][0]] == currCluster:
+                relevanceVec.append(1)
+            else:
+                relevanceVec.append(0)
+        else:
+            relevanceVec.append(0)
+    return computeAvgPrecision(relevanceVec, min(topK, len(SortedSimDict)))
+
+def saveSimDictForRandomQueries(smallflag=True, numberOfQueries = 10, minLinks = 5, outputFolderPrefix='data/simDictSmall/'):
+    loadGraphs(smallflag=True)
+    alphaList = [0.01, 0.05, 0.1, 0.3, 0.5, 0.7, 0.9, 0.99]
+
+    # if os.path.exists(outputFolderPrefix):
+    #     shutil.rmtree(outputFolderPrefix)
+
+    validIDs = getValidPapersUnsegregated(minLinks,minLinks)
+    queryIDs = random.sample(range(0,len(validIDs)-1), numberOfQueries)
+    for idx, queryID in enumerate(queryIDs):
+        print "Saving SimDict for: ", idx, validIDs[queryID]
+        query = validIDs[queryID]
+        for alpha in alphaList:
+            print 'alpha = ', alpha
+            outputFolder = outputFolderPrefix + 'alpha=' + str(alpha) + '/'
+            if not os.path.exists(outputFolder):
+                os.makedirs(outputFolder)
+            saveSimDictforQuery(graph, query, outputFolder, maxDist=3, alpha=alpha, SMALLflag=True, traditionalFlag=False)
+
+        print 'Traditional'
+        outputFolder = outputFolderPrefix + 'traditional/'
+        if not os.path.exists(outputFolder):
+            os.makedirs(outputFolder)
+        saveSimDictforQuery(graph, query, outputFolder, maxDist=3, SMALLflag=True, traditionalFlag=True)
 
 if __name__ == "__main__":
     time_start = time.time()
-
-    # getSimPathsInFile(maxDist=3, minLinks=5, smallflag=True, numberOfQueries=50)
+    task2CallSequence()
 
     print "Finished in " + str(time.time() - time_start) + " seconds."
 
