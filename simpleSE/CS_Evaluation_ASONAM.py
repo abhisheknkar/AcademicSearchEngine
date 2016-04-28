@@ -15,15 +15,24 @@ import shutil
 
 # -----------------------------------------------MASTER FUNCTIONS--------------------------------------------------
 def task1CallSequence():
-    writeflag=False
+    writeflag=True
     readflag=True
-    getClusterScoresForRandomQueries(folderPrefix='/home/csd154server/Abhishek_Narwekar/DDP/ASONAM/simDictSmall/', outFile='results/ClusterMAPs.pkl',  writeflag=writeflag, readflag=readflag, summaryFile='results/task1Summary.txt')
+    folderPrefix='/home/csd154server/Abhishek_Narwekar/DDP/ASONAM/simDictSmall_VIP/'
+    outFile='results/VIP/ClusterMAPs.pkl'
+    summaryFile='results/VIP/task1Summary.txt'
+    method = 'VIP'
+
+    saveSimDictForRandomQueries(smallflag=True, numberOfQueries = 50, minLinks = 5, outputFolderPrefix=folderPrefix, method=method)
+    getClusterScoresForRandomQueries(folderPrefix=folderPrefix, outFile=outFile,  writeflag=writeflag, readflag=readflag, summaryFile=summaryFile)
 
 def task2CallSequence():
     # saveSimDictForRandomQueries(smallflag=True, numberOfQueries = 50, minLinks = 5, outputFolderPrefix='/home/csd154server/Abhishek_Narwekar/DDP/ASONAM/simDictSmall/')
-    writeflag=False
+    writeflag=True
     readflag=True
-    getDistancesForRandomQueries(folderPrefix='/home/csd154server/Abhishek_Narwekar/DDP/ASONAM/simDictSmall/', outFile='results/avgdistances.pkl', writeflag=writeflag, readflag=readflag, summaryFile='results/task2Summary.txt')
+    folderPrefix='/home/csd154server/Abhishek_Narwekar/DDP/ASONAM/simDictSmall_VIP/'
+    outFile='results/VIP/avgdistances.pkl'
+    summaryFile='results/VIP/task2Summary.txt'
+    getDistancesForRandomQueries(folderPrefix=folderPrefix, outFile=outFile, writeflag=writeflag, readflag=readflag, summaryFile=summaryFile)
 
 def task3CallSequence():
     doReferencePredictionForRandomQueries()
@@ -59,7 +68,7 @@ def getValidPapersUnsegregated(minIn=20, minOut=20):
             validID.append(node)
     return validID
 
-def scoreGeneralizedCocitations(G,start,maxhops1=1, maxhops2=1, alpha=0.5, reverse=False, traditionalFlag=False):
+def scoreGeneralizedCocitations(G,start,maxhops1=1, maxhops2=1, alpha=0.5, reverse=False, traditionalFlag=False, method='VDP'):
     if traditionalFlag:
         maxhops1 = 1
         maxhops2 = 1
@@ -75,7 +84,11 @@ def scoreGeneralizedCocitations(G,start,maxhops1=1, maxhops2=1, alpha=0.5, rever
             paths = []
             for path1 in reachables1[node1]:
                 for path2 in reachables2[node2]:
+                    if method=='VIP':
+                        if len(Set(path1).intersection(Set(path2))) != 1: #Not disjoint
+                            break
                     finpath = path1 + path2[1:]
+                    # print finpath
                     # if len(finpath)-1>4:
                     #     continue
                     if node2 not in genCocitations:
@@ -101,13 +114,13 @@ def mergeSimDictsCCSR(SimDictCC, SimDictSR, graph, paper):
     # print "YOYO: " + paper + '; Length: ' + str(len(SimDict))
     return SimDict
 
-def getSimDictforQuery(graph, paper, outputFolder='', maxDist=3, alpha=0.5, SMALLflag=True, traditionalFlag=False, saveFlag=True):
+def getSimDictforQuery(graph, paper, outputFolder='', maxDist=3, alpha=0.5, SMALLflag=True, traditionalFlag=False, saveFlag=True, method='VDP'):
     outputPath = outputFolder + '/' + paper +'.pkl'
 
     count = 0
 
-    simDictCC = scoreGeneralizedCocitations(graph, paper, maxDist, maxDist, alpha, traditionalFlag=traditionalFlag)
-    simDictSR = scoreGeneralizedCocitations(graph, paper, maxDist, maxDist, alpha, reverse=True, traditionalFlag=traditionalFlag)
+    simDictCC = scoreGeneralizedCocitations(graph, paper, maxDist, maxDist, alpha, traditionalFlag=traditionalFlag, method=method)
+    simDictSR = scoreGeneralizedCocitations(graph, paper, maxDist, maxDist, alpha, reverse=True, traditionalFlag=traditionalFlag, method=method)
 
     if saveFlag:
         with open(outputPath, 'wb') as handle:
@@ -115,7 +128,7 @@ def getSimDictforQuery(graph, paper, outputFolder='', maxDist=3, alpha=0.5, SMAL
 
     return (simDictCC,simDictSR)
 
-def saveSimDictForRandomQueries(smallflag=True, numberOfQueries = 10, minLinks = 5, outputFolderPrefix='data/simDictSmall/'):
+def saveSimDictForRandomQueries(smallflag=True, numberOfQueries = 10, minLinks = 5, outputFolderPrefix='data/simDictSmall/', method='VDP'):
     loadGraphs(smallflag=True)
     alphaList = [0.01, 0.05, 0.1, 0.3, 0.5, 0.7, 0.9, 0.99]
     # alphaList = []
@@ -126,12 +139,12 @@ def saveSimDictForRandomQueries(smallflag=True, numberOfQueries = 10, minLinks =
     # Hardcoding the papers:
     # validIDsFull = os.listdir('/home/csd154server/Abhishek_Narwekar/DDP/ASONAM/simDictSmall/alpha=0.01/')
     # validIDs = [x[:-4] for x in validIDsFull]
-    # queryIDs = range(0,numberOfQueries)
     # OR:
-    # validIDs = ['1046227', '907663','1280018', '907669', '995660', '985077', '1010043', '797271', '1014794', '857701', '1023663', '1023252', '861010', '2866181', '860795', '1022869', '1343340', '857669', '1027807', '2998173', '2850836', '907796', '907569', '1270712', '880978', '1141582', '907881', '1045138', '499010', '796576', '835602', '1042957', '1343315', '1027785', '1041452', '570347', '1042555', '831732', '499381', '1042538', '1111869', '907609', '857704', '871766', '2867377', '918302', '2998182', '636918', '985045', '801187']
+    queryIDs = range(0,numberOfQueries)
+    validIDs = ['1046227', '907663','1280018', '907669', '995660', '985077', '1010043', '797271', '1014794', '857701', '1023663', '1023252', '861010', '2866181', '860795', '1022869', '1343340', '857669', '1027807', '2998173', '2850836', '907796', '907569', '1270712', '880978', '1141582', '907881', '1045138', '499010', '796576', '835602', '1042957', '1343315', '1027785', '1041452', '570347', '1042555', '831732', '499381', '1042538', '1111869', '907609', '857704', '871766', '2867377', '918302', '2998182', '636918', '985045', '801187']
 
-    validIDs = getValidPapersUnsegregated(minLinks,minLinks)
-    queryIDs = random.sample(range(0,len(validIDs)-1), numberOfQueries)
+    # validIDs = getValidPapersUnsegregated(minLinks,minLinks)
+    # queryIDs = random.sample(range(0,len(validIDs)-1), numberOfQueries)
     for idx, queryID in enumerate(queryIDs):
         print "Saving SimDict for: ", idx, validIDs[queryID]
         query = validIDs[queryID]
@@ -140,13 +153,13 @@ def saveSimDictForRandomQueries(smallflag=True, numberOfQueries = 10, minLinks =
             outputFolder = outputFolderPrefix + 'alpha=' + str(alpha) + '/'
             if not os.path.exists(outputFolder):
                 os.makedirs(outputFolder)
-            getSimDictforQuery(graph, query, outputFolder, maxDist=3, alpha=alpha, SMALLflag=True, traditionalFlag=False)
+            getSimDictforQuery(graph, query, outputFolder, maxDist=3, alpha=alpha, SMALLflag=True, traditionalFlag=False, method=method)
 
         print 'Traditional'
         outputFolder = outputFolderPrefix + 'alpha=traditional/'
         if not os.path.exists(outputFolder):
             os.makedirs(outputFolder)
-        getSimDictforQuery(graph, query, outputFolder, maxDist=1, SMALLflag=True, traditionalFlag=True)
+        getSimDictforQuery(graph, query, outputFolder, maxDist=1, SMALLflag=True, traditionalFlag=True, method=method)
 
 def mergeSimDictCCSR(SimDictCC, SimDictSR, graph, paper):
     keySet = set(SimDictCC).union(set(SimDictSR)).union(set(graph.successors(paper))).union(graph.predecessors(paper))
@@ -296,7 +309,7 @@ def getMAPforReferencePredictionFromSimDict(SimDict, refs, topK=100):
     # print toReturn
     return toReturn
 
-def doReferencePredictionForQuery(paper, con, predictPercent=20, iterations=10, topK=100, maxDist=3, alpha=0.5, SMALLflag=True, traditionalFlag=False):
+def doReferencePredictionForQuery(paper, con, predictPercent=20, iterations=10, topK=100, maxDist=3, alpha=0.5, SMALLflag=True, traditionalFlag=False, method='VDP'):
     MAP_CC = []
     MAP_SR = []
 
@@ -334,7 +347,7 @@ def doReferencePredictionForQuery(paper, con, predictPercent=20, iterations=10, 
 
         relevant = set([refs[x] for x in toRemove])
         # Get the simDicts
-        (SimDictCC, SimDictSR) = getSimDictforQuery(graphMod, paper, maxDist=maxDist, alpha=alpha, SMALLflag=True, traditionalFlag=traditionalFlag, saveFlag=False)
+        (SimDictCC, SimDictSR) = getSimDictforQuery(graphMod, paper, maxDist=maxDist, alpha=alpha, SMALLflag=True, traditionalFlag=traditionalFlag, saveFlag=False, method=method)
 
         # Get MAP
         MAP_CC.append(getMAPforReferencePredictionFromSimDict(SimDictCC, relevant, topK=100))
@@ -344,8 +357,9 @@ def doReferencePredictionForQuery(paper, con, predictPercent=20, iterations=10, 
 def doReferencePredictionForRandomQueries():
     writeflag = True
     readflag = True
-    outFile = 'results/refPredMAP.pkl'
-    summaryFile = 'results/task3Summary.txt'
+    outFile = 'results/VIP/refPredMAP.pkl'
+    summaryFile = 'results/VIP/task3Summary.txt'
+    method = 'VIP'
 
     con = mdb.connect('localhost', 'abhishek', 'Pass@1234', 'aminerV7')
     alphaList = [0.01, 0.05, 0.1, 0.3, 0.5, 0.7, 0.9, 0.99, 'traditional']
@@ -379,7 +393,7 @@ def doReferencePredictionForRandomQueries():
             for queryID in queryIDs:
                 paper = validIDs[queryID]
                 print alpha, paper, queryID
-                (MAPRefPredDict['CC'][str(alpha)][paper], MAPRefPredDict['SR'][str(alpha)][paper]) = doReferencePredictionForQuery(paper, con, predictPercent=predictPercent, iterations=iterations, topK=topK, maxDist=maxDist, alpha=alpha, SMALLflag=True, traditionalFlag=traditionalFlag)
+                (MAPRefPredDict['CC'][str(alpha)][paper], MAPRefPredDict['SR'][str(alpha)][paper]) = doReferencePredictionForQuery(paper, con, predictPercent=predictPercent, iterations=iterations, topK=topK, maxDist=maxDist, alpha=alpha, SMALLflag=True, traditionalFlag=traditionalFlag, method=method)
             with open(outFile, 'wb') as handle:
                 pickle.dump(MAPRefPredDict, handle)
     if readflag:
@@ -412,9 +426,8 @@ def doReferencePredictionForRandomQueries():
 if __name__ == "__main__":
     global time_start
     time_start = time.time()
-    # saveSimDictForRandomQueries(smallflag=True, numberOfQueries = 50, minLinks = 5, outputFolderPrefix='/home/csd154server/Abhishek_Narwekar/DDP/ASONAM/simDictSmall/')
-    # task1CallSequence()
-    # task2CallSequence()
+    task1CallSequence()
+    task2CallSequence()
     task3CallSequence()
 
     print "Finished in " + str(time.time() - time_start) + " seconds."

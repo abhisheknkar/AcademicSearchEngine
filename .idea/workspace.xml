@@ -2,15 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="60bf3af1-97f5-4e18-ba9b-11d049999c5b" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/simpleSE/CS_Evaluation_ASONAM.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/simpleSE/CS_Evaluation_ASONAM2.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/simpleSE/CS_Evaluation.py" afterPath="$PROJECT_DIR$/simpleSE/CS_Evaluation.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/SE0.1.iml" afterPath="$PROJECT_DIR$/.idea/SE0.1.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/render.py" afterPath="$PROJECT_DIR$/render.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/test.txt" afterPath="$PROJECT_DIR$/data/test.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/simpleSE/CS_Evaluation_ASONAM.py" afterPath="$PROJECT_DIR$/simpleSE/CS_Evaluation_ASONAM.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/simpleSE/CS_Evaluation_ASONAM2.py" afterPath="$PROJECT_DIR$/simpleSE/CS_Evaluation_ASONAM2.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/simpleSE/.idea/workspace.xml" afterPath="$PROJECT_DIR$/simpleSE/.idea/workspace.xml" />
     </list>
     <ignored path="SE0.1.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -34,8 +28,8 @@
       <file leaf-file-name="CS_Evaluation.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/simpleSE/CS_Evaluation.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="615" column="0" selection-start-line="615" selection-start-column="0" selection-end-line="615" selection-end-column="0" />
+            <state vertical-scroll-proportion="5.142857">
+              <caret line="115" column="150" selection-start-line="115" selection-start-column="150" selection-end-line="115" selection-end-column="150" />
               <folding>
                 <element signature="e#370#689#0" expanded="false" />
                 <element signature="e#748#927#0" expanded="false" />
@@ -51,7 +45,9 @@
                 <element signature="e#11098#12000#0" expanded="false" />
                 <element signature="e#12035#12708#0" expanded="false" />
                 <element signature="e#12826#15908#0" expanded="false" />
+                <element signature="e#15988#18112#0" expanded="false" />
                 <element signature="e#18145#18510#0" expanded="false" />
+                <element signature="e#18608#20915#0" expanded="false" />
                 <element signature="e#20980#21506#0" expanded="false" />
                 <element signature="e#21591#23029#0" expanded="false" />
                 <element signature="e#23066#23290#0" expanded="false" />
@@ -62,29 +58,52 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CS_Evaluation_ASONAM.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="CentralitySimilarity.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/simpleSE/CentralitySimilarity.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="19" column="39" selection-start-line="19" selection-start-column="39" selection-end-line="19" selection-end-column="39" />
+              <folding>
+                <element signature="e#226#518#0" expanded="false" />
+                <element signature="e#564#1674#0" expanded="false" />
+                <element signature="e#1756#2530#0" expanded="false" />
+                <element signature="e#2572#2592#0" expanded="false" />
+                <element signature="e#3381#3908#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="write2DB_DBLP.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/simpleSE/write2DB_DBLP.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-3.0091186">
+              <caret line="38" column="34" selection-start-line="38" selection-start-column="20" selection-end-line="38" selection-end-column="34" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CS_Evaluation_ASONAM.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/simpleSE/CS_Evaluation_ASONAM.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="2.9304812">
-              <caret line="409" column="27" selection-start-line="409" selection-start-column="27" selection-end-line="409" selection-end-column="27" />
+            <state vertical-scroll-proportion="-6.6">
+              <caret line="203" column="42" selection-start-line="203" selection-start-column="42" selection-end-line="203" selection-end-column="42" />
               <folding>
-                <element signature="e#470#734#0" expanded="false" />
-                <element signature="e#765#1195#0" expanded="false" />
-                <element signature="e#1226#1265#0" expanded="false" />
-                <element signature="e#1414#1779#0" expanded="false" />
-                <element signature="e#1823#2158#0" expanded="false" />
-                <element signature="e#2217#2396#0" expanded="false" />
-                <element signature="e#2516#3466#0" expanded="false" />
-                <element signature="e#3531#4057#0" expanded="false" />
-                <element signature="e#4194#4658#0" expanded="false" />
-                <element signature="e#4790#6678#0" expanded="false" />
-                <element signature="e#6742#7201#0" expanded="false" />
-                <element signature="e#7404#7941#0" expanded="false" />
-                <element signature="e#8170#10172#0" expanded="false" />
-                <element signature="e#10368#10716#0" expanded="false" />
-                <element signature="e#10851#12647#0" expanded="false" />
-                <element signature="e#12842#13281#0" expanded="false" />
-                <element signature="e#13439#15123#0" expanded="false" />
+                <element signature="e#470#975#0" expanded="false" />
+                <element signature="e#1006#1525#0" expanded="false" />
+                <element signature="e#1556#1595#0" expanded="false" />
+                <element signature="e#1744#2109#0" expanded="false" />
+                <element signature="e#2153#2488#0" expanded="false" />
+                <element signature="e#2547#2726#0" expanded="false" />
+                <element signature="e#2860#4006#0" expanded="false" />
+                <element signature="e#4071#4597#0" expanded="false" />
+                <element signature="e#4748#5242#0" expanded="false" />
+                <element signature="e#5388#7306#0" expanded="false" />
+                <element signature="e#7370#7829#0" expanded="false" />
+                <element signature="e#10996#11344#0" expanded="false" />
+                <element signature="e#11479#13275#0" expanded="false" />
+                <element signature="e#13470#13909#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -94,32 +113,22 @@
         <entry file="file://$PROJECT_DIR$/simpleSE/CS_Evaluation_ASONAM2.py">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="606" column="0" selection-start-line="559" selection-start-column="0" selection-end-line="606" selection-end-column="0" />
+              <caret line="384" column="43" selection-start-line="384" selection-start-column="43" selection-end-line="384" selection-end-column="43" />
               <folding>
-                <element signature="e#367#638#0" expanded="false" />
-                <element signature="e#697#876#0" expanded="false" />
-                <element signature="e#996#1880#0" expanded="false" />
-                <element signature="e#2010#2414#0" expanded="false" />
-                <element signature="e#2478#2937#0" expanded="false" />
-                <element signature="e#3094#5072#0" expanded="false" />
-                <element signature="e#5134#6386#0" expanded="false" />
-                <element signature="e#6464#7483#0" expanded="false" />
-                <element signature="e#7566#8468#0" expanded="false" />
-                <element signature="e#8503#9176#0" expanded="false" />
-                <element signature="e#9294#12376#0" expanded="false" />
-                <element signature="e#12452#12800#0" expanded="false" />
-                <element signature="e#12833#13198#0" expanded="false" />
-                <element signature="e#13296#15603#0" expanded="false" />
-                <element signature="e#15668#16194#0" expanded="false" />
-                <element signature="e#16279#17717#0" expanded="false" />
-                <element signature="e#17754#17978#0" expanded="false" />
-                <element signature="e#18022#20136#0" expanded="false" />
-                <element signature="e#20224#20980#0" expanded="false" />
-                <element signature="e#21115#22908#0" expanded="false" />
-                <element signature="e#23354#23572#0" expanded="false" />
-                <element signature="e#23801#25802#0" expanded="false" />
-                <element signature="e#25884#26421#0" expanded="false" />
-                <element signature="e#26553#27637#0" expanded="false" />
+                <element signature="e#1744#2109#0" expanded="false" />
+                <element signature="e#2153#2488#0" expanded="false" />
+                <element signature="e#2547#2726#0" expanded="false" />
+                <element signature="e#2860#4006#0" expanded="false" />
+                <element signature="e#4071#4597#0" expanded="false" />
+                <element signature="e#4748#5242#0" expanded="false" />
+                <element signature="e#5388#7306#0" expanded="false" />
+                <element signature="e#7370#7829#0" expanded="false" />
+                <element signature="e#8032#8569#0" expanded="false" />
+                <element signature="e#8798#10800#0" expanded="false" />
+                <element signature="e#10996#11344#0" expanded="false" />
+                <element signature="e#11479#13275#0" expanded="false" />
+                <element signature="e#13470#13909#0" expanded="false" />
+                <element signature="e#14081#15780#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -151,14 +160,14 @@
         <option value="$PROJECT_DIR$/simpleSE/graphOps_DBLP.py" />
         <option value="$PROJECT_DIR$/simpleSE/getSimilarity.py" />
         <option value="$PROJECT_DIR$/CentralitySimilarity.py" />
-        <option value="$PROJECT_DIR$/simpleSE/write2DB_DBLP.py" />
         <option value="$PROJECT_DIR$/simpleSE/CentralitySimilarity.py" />
         <option value="$PROJECT_DIR$/simpleSE/eval_analysis.py" />
         <option value="$PROJECT_DIR$/data/test.txt" />
         <option value="$PROJECT_DIR$/render.py" />
         <option value="$PROJECT_DIR$/simpleSE/CS_Evaluation.py" />
-        <option value="$PROJECT_DIR$/simpleSE/CS_Evaluation_ASONAM2.py" />
         <option value="$PROJECT_DIR$/simpleSE/CS_Evaluation_ASONAM.py" />
+        <option value="$PROJECT_DIR$/simpleSE/CS_Evaluation_ASONAM2.py" />
+        <option value="$PROJECT_DIR$/simpleSE/write2DB_DBLP.py" />
       </list>
     </option>
   </component>
@@ -194,8 +203,8 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="Scratches" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -239,7 +248,7 @@
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
   </component>
-  <component name="RunManager" selected="Python.CS_Evaluation_ASONAM">
+  <component name="RunManager" selected="Python.CS_Evaluation_ASONAM2">
     <configuration default="false" name="CS_Evaluation" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -456,8 +465,8 @@
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Python.CS_Evaluation_ASONAM" />
-        <item index="1" class="java.lang.String" itemvalue="Python.CS_Evaluation_ASONAM2" />
+        <item index="0" class="java.lang.String" itemvalue="Python.CS_Evaluation_ASONAM2" />
+        <item index="1" class="java.lang.String" itemvalue="Python.CS_Evaluation_ASONAM" />
         <item index="2" class="java.lang.String" itemvalue="Python.render" />
         <item index="3" class="java.lang.String" itemvalue="Python.CS_Evaluation" />
         <item index="4" class="java.lang.String" itemvalue="Python.eval_analysis" />
@@ -494,9 +503,9 @@
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.327787" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32850242" sideWeight="0.50938773" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33777037" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Python Console" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.33777037" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32943144" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3294509" sideWeight="0.49061224" order="2" side_tool="false" content_ui="tabs" x="962" y="52" width="317" height="668" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3294509" sideWeight="0.49061224" order="2" side_tool="false" content_ui="tabs" x="962" y="52" width="317" height="668" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33777037" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -524,7 +533,7 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="21" />
+      <option name="time" value="22" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -555,7 +564,9 @@
             <element signature="e#11098#12000#0" expanded="false" />
             <element signature="e#12035#12708#0" expanded="false" />
             <element signature="e#12826#15908#0" expanded="false" />
+            <element signature="e#15988#18112#0" expanded="false" />
             <element signature="e#18145#18510#0" expanded="false" />
+            <element signature="e#18608#20915#0" expanded="false" />
             <element signature="e#20980#21506#0" expanded="false" />
             <element signature="e#21591#23029#0" expanded="false" />
             <element signature="e#23066#23290#0" expanded="false" />
@@ -572,6 +583,9 @@
           <folding>
             <element signature="e#226#518#0" expanded="false" />
             <element signature="e#564#1674#0" expanded="false" />
+            <element signature="e#1756#2530#0" expanded="false" />
+            <element signature="e#2572#2592#0" expanded="false" />
+            <element signature="e#3381#3908#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -623,7 +637,9 @@
             <element signature="e#11098#12000#0" expanded="false" />
             <element signature="e#12035#12708#0" expanded="false" />
             <element signature="e#12826#15908#0" expanded="false" />
+            <element signature="e#15988#18112#0" expanded="false" />
             <element signature="e#18145#18510#0" expanded="false" />
+            <element signature="e#18608#20915#0" expanded="false" />
             <element signature="e#20980#21506#0" expanded="false" />
             <element signature="e#21591#23029#0" expanded="false" />
             <element signature="e#23066#23290#0" expanded="false" />
@@ -878,17 +894,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/simpleSE/CentralitySimilarity.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="104" column="0" selection-start-line="104" selection-start-column="0" selection-end-line="104" selection-end-column="0" />
-          <folding>
-            <element signature="e#226#518#0" expanded="false" />
-            <element signature="e#564#1674#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/render.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.6097561">
@@ -903,13 +908,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/simpleSE/write2DB_DBLP.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6048387">
-          <caret line="130" column="25" selection-start-line="130" selection-start-column="25" selection-end-line="130" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/simpleSE/searchDBLP.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -919,8 +917,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/simpleSE/CS_Evaluation.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="615" column="0" selection-start-line="615" selection-start-column="0" selection-end-line="615" selection-end-column="0" />
+        <state vertical-scroll-proportion="5.142857">
+          <caret line="115" column="150" selection-start-line="115" selection-start-column="150" selection-end-line="115" selection-end-column="150" />
           <folding>
             <element signature="e#370#689#0" expanded="false" />
             <element signature="e#748#927#0" expanded="false" />
@@ -936,7 +934,9 @@
             <element signature="e#11098#12000#0" expanded="false" />
             <element signature="e#12035#12708#0" expanded="false" />
             <element signature="e#12826#15908#0" expanded="false" />
+            <element signature="e#15988#18112#0" expanded="false" />
             <element signature="e#18145#18510#0" expanded="false" />
+            <element signature="e#18608#20915#0" expanded="false" />
             <element signature="e#20980#21506#0" expanded="false" />
             <element signature="e#21591#23029#0" expanded="false" />
             <element signature="e#23066#23290#0" expanded="false" />
@@ -946,62 +946,71 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/simpleSE/CS_Evaluation_ASONAM.py">
+    <entry file="file://$PROJECT_DIR$/simpleSE/CS_Evaluation_ASONAM2.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="2.9304812">
-          <caret line="409" column="27" selection-start-line="409" selection-start-column="27" selection-end-line="409" selection-end-column="27" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="384" column="43" selection-start-line="384" selection-start-column="43" selection-end-line="384" selection-end-column="43" />
           <folding>
-            <element signature="e#470#734#0" expanded="false" />
-            <element signature="e#765#1195#0" expanded="false" />
-            <element signature="e#1226#1265#0" expanded="false" />
-            <element signature="e#1414#1779#0" expanded="false" />
-            <element signature="e#1823#2158#0" expanded="false" />
-            <element signature="e#2217#2396#0" expanded="false" />
-            <element signature="e#2516#3466#0" expanded="false" />
-            <element signature="e#3531#4057#0" expanded="false" />
-            <element signature="e#4194#4658#0" expanded="false" />
-            <element signature="e#4790#6678#0" expanded="false" />
-            <element signature="e#6742#7201#0" expanded="false" />
-            <element signature="e#7404#7941#0" expanded="false" />
-            <element signature="e#8170#10172#0" expanded="false" />
-            <element signature="e#10368#10716#0" expanded="false" />
-            <element signature="e#10851#12647#0" expanded="false" />
-            <element signature="e#12842#13281#0" expanded="false" />
-            <element signature="e#13439#15123#0" expanded="false" />
+            <element signature="e#1744#2109#0" expanded="false" />
+            <element signature="e#2153#2488#0" expanded="false" />
+            <element signature="e#2547#2726#0" expanded="false" />
+            <element signature="e#2860#4006#0" expanded="false" />
+            <element signature="e#4071#4597#0" expanded="false" />
+            <element signature="e#4748#5242#0" expanded="false" />
+            <element signature="e#5388#7306#0" expanded="false" />
+            <element signature="e#7370#7829#0" expanded="false" />
+            <element signature="e#8032#8569#0" expanded="false" />
+            <element signature="e#8798#10800#0" expanded="false" />
+            <element signature="e#10996#11344#0" expanded="false" />
+            <element signature="e#11479#13275#0" expanded="false" />
+            <element signature="e#13470#13909#0" expanded="false" />
+            <element signature="e#14081#15780#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/simpleSE/CS_Evaluation_ASONAM2.py">
+    <entry file="file://$PROJECT_DIR$/simpleSE/CentralitySimilarity.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="606" column="0" selection-start-line="559" selection-start-column="0" selection-end-line="606" selection-end-column="0" />
+          <caret line="19" column="39" selection-start-line="19" selection-start-column="39" selection-end-line="19" selection-end-column="39" />
           <folding>
-            <element signature="e#367#638#0" expanded="false" />
-            <element signature="e#697#876#0" expanded="false" />
-            <element signature="e#996#1880#0" expanded="false" />
-            <element signature="e#2010#2414#0" expanded="false" />
-            <element signature="e#2478#2937#0" expanded="false" />
-            <element signature="e#3094#5072#0" expanded="false" />
-            <element signature="e#5134#6386#0" expanded="false" />
-            <element signature="e#6464#7483#0" expanded="false" />
-            <element signature="e#7566#8468#0" expanded="false" />
-            <element signature="e#8503#9176#0" expanded="false" />
-            <element signature="e#9294#12376#0" expanded="false" />
-            <element signature="e#12452#12800#0" expanded="false" />
-            <element signature="e#12833#13198#0" expanded="false" />
-            <element signature="e#13296#15603#0" expanded="false" />
-            <element signature="e#15668#16194#0" expanded="false" />
-            <element signature="e#16279#17717#0" expanded="false" />
-            <element signature="e#17754#17978#0" expanded="false" />
-            <element signature="e#18022#20136#0" expanded="false" />
-            <element signature="e#20224#20980#0" expanded="false" />
-            <element signature="e#21115#22908#0" expanded="false" />
-            <element signature="e#23354#23572#0" expanded="false" />
-            <element signature="e#23801#25802#0" expanded="false" />
-            <element signature="e#25884#26421#0" expanded="false" />
-            <element signature="e#26553#27637#0" expanded="false" />
+            <element signature="e#226#518#0" expanded="false" />
+            <element signature="e#564#1674#0" expanded="false" />
+            <element signature="e#1756#2530#0" expanded="false" />
+            <element signature="e#2572#2592#0" expanded="false" />
+            <element signature="e#3381#3908#0" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/simpleSE/CS_Evaluation_ASONAM.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-6.6">
+          <caret line="203" column="42" selection-start-line="203" selection-start-column="42" selection-end-line="203" selection-end-column="42" />
+          <folding>
+            <element signature="e#470#975#0" expanded="false" />
+            <element signature="e#1006#1525#0" expanded="false" />
+            <element signature="e#1556#1595#0" expanded="false" />
+            <element signature="e#1744#2109#0" expanded="false" />
+            <element signature="e#2153#2488#0" expanded="false" />
+            <element signature="e#2547#2726#0" expanded="false" />
+            <element signature="e#2860#4006#0" expanded="false" />
+            <element signature="e#4071#4597#0" expanded="false" />
+            <element signature="e#4748#5242#0" expanded="false" />
+            <element signature="e#5388#7306#0" expanded="false" />
+            <element signature="e#7370#7829#0" expanded="false" />
+            <element signature="e#10996#11344#0" expanded="false" />
+            <element signature="e#11479#13275#0" expanded="false" />
+            <element signature="e#13470#13909#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/simpleSE/write2DB_DBLP.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-3.0091186">
+          <caret line="38" column="34" selection-start-line="38" selection-start-column="20" selection-end-line="38" selection-end-column="34" />
+          <folding />
         </state>
       </provider>
     </entry>
