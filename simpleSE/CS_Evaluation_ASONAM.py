@@ -12,18 +12,24 @@ import os
 import MySQLdb as mdb
 import random
 import shutil
+import matplotlib.pyplot as plt
 
 # -----------------------------------------------MASTER FUNCTIONS--------------------------------------------------
 def task1CallSequence():
+    global finpathDist
+    finpathDist = np.zeros(6)
     writeflag=True
     readflag=True
-    folderPrefix='/home/csd154server/Abhishek_Narwekar/DDP/ASONAM/simDictSmall_VIP/'
-    outFile='results/VIP/ClusterMAPs.pkl'
-    summaryFile='results/VIP/task1Summary.txt'
+    folderPrefix='/home/csd154server/Abhishek_Narwekar/DDP/ASONAM/simDictSmall/'
+    outFile='results/ClusterMAPs.pkl'
+    summaryFile='results/task1Summary.txt'
     method = 'VIP'
 
-    saveSimDictForRandomQueries(smallflag=True, numberOfQueries = 50, minLinks = 5, outputFolderPrefix=folderPrefix, method=method)
+    saveSimDictForRandomQueries(smallflag=True, numberOfQueries = 1, minLinks = 5, outputFolderPrefix=folderPrefix, method=method)
     getClusterScoresForRandomQueries(folderPrefix=folderPrefix, outFile=outFile,  writeflag=writeflag, readflag=readflag, summaryFile=summaryFile)
+    # with open('results/finPathDict.pkl','wb') as handle:
+    #     pickle.dump(finpathDist, handle)
+    #     print finpathDist
 
 def task2CallSequence():
     # saveSimDictForRandomQueries(smallflag=True, numberOfQueries = 50, minLinks = 5, outputFolderPrefix='/home/csd154server/Abhishek_Narwekar/DDP/ASONAM/simDictSmall/')
@@ -62,6 +68,7 @@ def computeAvgPrecision(input, till):
     return MAP
 
 def getValidPapersUnsegregated(minIn=20, minOut=20):
+    loadGraphs(smallflag=True)
     validID = []
     for node in graph:
         if len(graph.neighbors(node)) >= minIn and len(graph.predecessors(node)) >= minOut:
@@ -91,6 +98,7 @@ def scoreGeneralizedCocitations(G,start,maxhops1=1, maxhops2=1, alpha=0.5, rever
                     # print finpath
                     # if len(finpath)-1>4:
                     #     continue
+                    finpathDist[len(finpath)-2] += 1
                     if node2 not in genCocitations:
                         genCocitations[node2] = 0
                     if traditionalFlag:
@@ -114,7 +122,7 @@ def mergeSimDictsCCSR(SimDictCC, SimDictSR, graph, paper):
     # print "YOYO: " + paper + '; Length: ' + str(len(SimDict))
     return SimDict
 
-def getSimDictforQuery(graph, paper, outputFolder='', maxDist=3, alpha=0.5, SMALLflag=True, traditionalFlag=False, saveFlag=True, method='VDP'):
+def getSimDictforQuery(graph, paper, outputFolder='', maxDist=3, alpha=0.5, SMALLflag=True, traditionalFlag=False, saveFlag=False, method='VDP'):
     outputPath = outputFolder + '/' + paper +'.pkl'
 
     count = 0
@@ -131,7 +139,7 @@ def getSimDictforQuery(graph, paper, outputFolder='', maxDist=3, alpha=0.5, SMAL
 def saveSimDictForRandomQueries(smallflag=True, numberOfQueries = 10, minLinks = 5, outputFolderPrefix='data/simDictSmall/', method='VDP'):
     loadGraphs(smallflag=True)
     alphaList = [0.01, 0.05, 0.1, 0.3, 0.5, 0.7, 0.9, 0.99]
-    # alphaList = []
+    # alphaList = [0.01]
 
     # if os.path.exists(outputFolderPrefix):
     #     shutil.rmtree(outputFolderPrefix)
@@ -355,11 +363,11 @@ def doReferencePredictionForQuery(paper, con, predictPercent=20, iterations=10, 
     return (MAP_CC, MAP_SR)
 
 def doReferencePredictionForRandomQueries():
-    writeflag = True
+    writeflag = False
     readflag = True
     outFile = 'results/VIP/refPredMAP.pkl'
     summaryFile = 'results/VIP/task3Summary.txt'
-    method = 'VIP'
+    method = 'VDP'
 
     con = mdb.connect('localhost', 'abhishek', 'Pass@1234', 'aminerV7')
     alphaList = [0.01, 0.05, 0.1, 0.3, 0.5, 0.7, 0.9, 0.99, 'traditional']
@@ -369,6 +377,7 @@ def doReferencePredictionForRandomQueries():
     topK=100
     maxDist=3
     SMALLflag=True
+    bigRefPaps = getValidPapersUnsegregated(minIn=5, minOut=10)
 
     validIDs = ['1046227', '907663','1280018', '907669', '995660', '985077', '1010043', '797271', '1014794', '857701', '1023663', '1023252', '861010', '2866181', '860795', '1022869', '1343340', '857669', '1027807', '2998173', '2850836', '907796', '907569', '1270712', '880978', '1141582', '907881', '1045138', '499010', '796576', '835602', '1042957', '1343315', '1027785', '1041452', '570347', '1042555', '831732', '499381', '1042538', '1111869', '907609', '857704', '871766', '2867377', '918302', '2998182', '636918', '985045', '801187']
     # validIDs = ['907669']
@@ -407,6 +416,8 @@ def doReferencePredictionForRandomQueries():
             CCmeanVec = []
             SRmeanVec = []
             for paper in MAPRefPredDict['CC'][str(alpha)]:
+                if paper not in bigRefPaps:
+                    continue
                 CCraw = np.array(MAPRefPredDict['CC'][str(alpha)][paper])
                 CCraw[np.isnan(CCraw)]=0
                 CCmeanVec.append(np.mean(CCraw))
@@ -414,20 +425,50 @@ def doReferencePredictionForRandomQueries():
                 SRraw = np.array(MAPRefPredDict['SR'][str(alpha)][paper])
                 SRraw[np.isnan(CCraw)]=0
                 SRmeanVec.append(np.mean(SRraw))
-
+            print SRmeanVec
             CCmeanmean = np.mean(CCmeanVec)
             SRmeanmean = np.mean(SRmeanVec)
+            CCstdmean = np.std(CCmeanVec)
+            SRstdmean = np.std(SRmeanVec)
 
-            f.write(str(alpha) + '\t' + str(CCmeanmean) + '\t' + str(SRmeanmean) + '\n')
+            f.write(str(alpha) + '\t' + str(CCmeanmean) + '\t' + str(CCstdmean) + '\t' + str(SRmeanmean)+ '\t' + str(SRstdmean) + '\n')
 # -------------------------------------------------------------------------------------------------------------------------------
 # -------------------------------------------------THE REAL DEAL-----------------------------------------------------------------
 # -------------------------------------------------------------------------------------------------------------------------------
 
+def misc_PathLengthEvaluation():
+    VDPvec = np.array([1935,685760,263504,532024,59136],dtype=float)
+    VIPvec = np.array([418,85247,31042,62288,2106],dtype=float)
+    # print np.sum(VDPvec)
+    # print np.sum(VIPvec)
+    VDPvec = VDPvec / np.sum(VDPvec) * 100
+    VIPvec = VIPvec / np.sum(VIPvec) * 100
+    # print VDPvec
+    # print VIPvec
+    ind = np.arange(5)
+    width = 0.35       # the width of the bars
+
+    fig, ax = plt.subplots()
+    rects1 = ax.bar(ind, VDPvec, width, color='r')
+    rects2 = ax.bar(ind + width, VIPvec, width, color='y')
+    ax.set_ylabel('Percentage of Paths')
+    ax.set_title('Path Length')
+    ax.set_xticks(ind + width)
+    ax.set_xticklabels(('2', '3', '4', '5', '6'))
+    ax.legend((rects1[0], rects2[0]), ('Generalized', 'Vertex Disjoint'))
+
+    # plt.show()
+    plt.savefig("percentComparison.eps", format='eps', dpi=1000)
+
+
 if __name__ == "__main__":
     global time_start
     time_start = time.time()
-    task1CallSequence()
-    task2CallSequence()
+    # task1CallSequence()
+    # task2CallSequence()
     task3CallSequence()
+    # misc_PathLengthEvaluation()
+
+
 
     print "Finished in " + str(time.time() - time_start) + " seconds."

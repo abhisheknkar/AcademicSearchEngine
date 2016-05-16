@@ -68,18 +68,18 @@ def len2simFunc(length, alpha=0.5):
 def nodeAtHops(G,start,currhops=0,maxhops=1, visited=[], dir2nodes={}, reverse=False):
     visited2 = visited + [start]
 
-    if currhops <= maxhops or len(G.neighbors(start))==0:
+    if reverse == False:
+        nbrs = G.neighbors(start)
+    else:
+        nbrs = G.predecessors(start)
+
+    if currhops <= maxhops or len(nbrs)==0:
         if currhops > 0:
             if start not in dir2nodes:
                 dir2nodes[start] = []
             dir2nodes[start].append(visited2)
         if currhops == maxhops:
             return dir2nodes
-
-    if reverse == False:
-        nbrs = G.neighbors(start)
-    else:
-        nbrs = G.predecessors(start)
 
     if len(nbrs)>0:
         for nbr in nbrs:
@@ -107,8 +107,8 @@ if __name__ == "__main__":
     filename = '../data/test.txt'
 
     G = nx.read_adjlist(filename, create_using=nx.DiGraph())
-    S = getGeneralizedCocitation(G,u'1', 3, 3, reverse=False)
-    print S
-
-    # S = computeSimilarityPair(G,node1=u'4',node2=u'5',maxdist=3, disjoint=True)
+    # S = getGeneralizedCocitation(G,u'1', 3, 3, reverse=False)
     # print S
+
+    S = computeSimilarityPair(G,node1=u'5',node2=u'3',maxdist=3, alpha=0.5, disjoint=True)
+    print S
